@@ -4,15 +4,29 @@
   "info": {
     "singularName": "promo-code",
     "pluralName": "promo-codes",
-    "displayName": "promo code"
+    "displayName": "promo code",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "promo_code": {
-      "type": "string"
+    "code": {
+      "type": "string",
+      "required": true,
+      "minLength": 3,
+      "unique": true
+    },
+    "expiration_date": {
+      "type": "date",
+      "required": true
+    },
+    "discount_percentage": {
+      "type": "decimal",
+      "required": true,
+      "max": 100,
+      "min": 0
     }
   }
 }
