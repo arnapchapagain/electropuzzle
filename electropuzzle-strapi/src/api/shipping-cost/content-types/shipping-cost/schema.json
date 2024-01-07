@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shipping_costs",
+  "info": {
+    "singularName": "shipping-cost",
+    "pluralName": "shipping-costs",
+    "displayName": "Shipping Cost"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cost": {
+      "type": "decimal",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true,
+      "maxLength": 1
+    }
+  }
+}
