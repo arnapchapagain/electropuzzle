@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - ElectroPuzzle</title>
+    <link rel="stylesheet" href="css/style.min.css" />
+    <style>
+      @media screen and (max-width: 1280px) {
+        html,
+        body {
+          font-size: calc(100vw / 1280 * 10);
+        }
+      }
+
+      @media screen and (max-width: 1024px) {
+        html,
+        body {
+          font-size: calc(100vw / 1024 * 10);
+        }
+      }
+
+      @media screen and (max-width: 640px) {
+        html,
+        body {
+          font-size: calc(100vw / 640 * 10);
+        }
+      }
+    </style>
+  </head>
+  <body style="background-color: #f9f8f8; overflow: hidden">
+    <header class="header">
+      <div class="container header__container">
+        <a href="index.html" class="logo header__logo"
+          ><img
+            src="images/logo-black.svg"
+            alt="ElectroPuzzle"
+            class="logo__img header__logo-img"
+          /><span
+            style="color: #444"
+            class="logo__text header__logo-text page-404__logo-text"
+            >ElectroPuzzle</span
+          ></a
+        >
+      </div>
+    </header>
+    <main class="main page-404">
+      <div class="page-404__content">
+        <div class="page-404__text-block">
+          <h1 class="page-404__title">404</h1>
+          <p class="page-404__text">Что-то пошло не так</p>
+          <a href="index.html" class="page-404__btn">На главную</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
