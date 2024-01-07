@@ -27,6 +27,12 @@
       "required": true,
       "max": 100,
       "min": 0
+    },
+    "pedals": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::pedal.pedal",
+      "inversedBy": "promo_codes"
     }
   }
 }
