@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "basket": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::basket.basket"
+    },
+    "full_name": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "phone": {
+      "type": "string",
+      "required": true,
+      "minLength": 8,
+      "regex": "$[0-9]*^"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "address_street": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "address_apartment": {
+      "type": "string"
+    },
+    "address_floor": {
+      "type": "string"
+    },
+    "address_entrance": {
+      "type": "string"
+    },
+    "address_index": {
+      "type": "string"
+    },
+    "comments": {
+      "type": "text"
+    }
+  }
+}
