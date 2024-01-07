@@ -677,6 +677,95 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiBasketBasket extends Schema.CollectionType {
+  collectionName: 'baskets';
+  info: {
+    singularName: 'basket';
+    pluralName: 'baskets';
+    displayName: 'basket';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    pedals: Attribute.Relation<
+      'api::basket.basket',
+      'oneToMany',
+      'api::pedal.pedal'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::basket.basket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::basket.basket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'Order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    basket: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'api::basket.basket'
+    >;
+    full_name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    phone: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 8;
+      }>;
+    email: Attribute.String & Attribute.Required;
+    address_street: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    address_apartment: Attribute.String;
+    address_floor: Attribute.String;
+    address_entrance: Attribute.String;
+    address_index: Attribute.String;
+    comments: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPedalPedal extends Schema.CollectionType {
   collectionName: 'pedals';
   info: {
@@ -890,6 +979,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::basket.basket': ApiBasketBasket;
+      'api::order.order': ApiOrderOrder;
       'api::pedal.pedal': ApiPedalPedal;
       'api::promo-code.promo-code': ApiPromoCodePromoCode;
     }
