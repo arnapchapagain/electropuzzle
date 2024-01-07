@@ -4,7 +4,8 @@
   "info": {
     "singularName": "pedal",
     "pluralName": "pedals",
-    "displayName": "Pedal"
+    "displayName": "Pedal",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -79,24 +80,25 @@
       "minLength": 1
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ],
-      "type": "media",
-      "multiple": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
-      "required": true
+      }
     },
     "additional_imgages": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
       ],
-      "type": "media",
-      "multiple": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -104,11 +106,12 @@
       }
     },
     "videoes": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "videos"
       ],
-      "type": "media",
-      "multiple": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -144,6 +147,16 @@
       "relation": "manyToMany",
       "target": "api::promo-code.promo-code",
       "mappedBy": "pedals"
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "uid",
+      "required": true,
+      "minLength": 1
     }
   }
 }

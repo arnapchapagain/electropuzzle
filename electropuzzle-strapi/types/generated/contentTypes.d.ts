@@ -683,6 +683,7 @@ export interface ApiPedalPedal extends Schema.CollectionType {
     singularName: 'pedal';
     pluralName: 'pedals';
     displayName: 'Pedal';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -791,6 +792,16 @@ export interface ApiPedalPedal extends Schema.CollectionType {
       'manyToMany',
       'api::promo-code.promo-code'
     >;
+    slug: Attribute.UID &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
