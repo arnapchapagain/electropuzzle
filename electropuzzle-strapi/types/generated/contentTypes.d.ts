@@ -682,7 +682,8 @@ export interface ApiBasketBasket extends Schema.CollectionType {
   info: {
     singularName: 'basket';
     pluralName: 'baskets';
-    displayName: 'basket';
+    displayName: 'Basket';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -921,7 +922,7 @@ export interface ApiPromoCodePromoCode extends Schema.CollectionType {
   info: {
     singularName: 'promo-code';
     pluralName: 'promo-codes';
-    displayName: 'promo code';
+    displayName: 'Promo Code';
     description: '';
   };
   options: {
