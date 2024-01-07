@@ -138,6 +138,12 @@
         }
       },
       "type": "json"
+    },
+    "promo_codes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::promo-code.promo-code",
+      "mappedBy": "pedals"
     }
   }
 }
