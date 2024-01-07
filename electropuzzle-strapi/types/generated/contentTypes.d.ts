@@ -786,6 +786,11 @@ export interface ApiPedalPedal extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    promo_codes: Attribute.Relation<
+      'api::pedal.pedal',
+      'manyToMany',
+      'api::promo-code.promo-code'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -835,6 +840,11 @@ export interface ApiPromoCodePromoCode extends Schema.CollectionType {
         min: 0;
         max: 100;
       }>;
+    pedals: Attribute.Relation<
+      'api::promo-code.promo-code',
+      'manyToMany',
+      'api::pedal.pedal'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
