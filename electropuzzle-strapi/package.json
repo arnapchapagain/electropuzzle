@@ -1,35 +1,35 @@
 {
-  "name": "electropuzzle-strapi",
-  "private": true,
+  "name": "ElectroPuzzle/strapi",
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "license": "MIT",
+  "private": true,
+  "description": "An ElectroPuzzle admin application",
   "scripts": {
+    "postinstall": "patch-package",
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.16.2",
-    "@strapi/plugin-users-permissions": "4.16.2",
-    "@strapi/plugin-i18n": "4.16.2",
-    "@strapi/plugin-cloud": "4.16.2",
-    "better-sqlite3": "8.6.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "5.3.4",
-    "styled-components": "5.3.3"
+    "@strapi/admin": "^4.14.3",
+    "@strapi/plugin-graphql": "^4.12.3",
+    "@strapi/plugin-i18n": "4.12.7",
+    "@strapi/plugin-users-permissions": "4.12.7",
+    "@strapi/provider-email-amazon-ses": "^4.14.3",
+    "@strapi/strapi": "^4.14.3",
+    "better-sqlite3": "8.5.0",
+    "strapi-plugin-heroicons-field": "^0.0.3"
   },
-  "author": {
-    "name": "A Strapi developer"
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "patch-package": "^8.0.0"
   },
   "strapi": {
-    "uuid": "85098ea8-6171-4632-a1b9-305385cc3c78"
+    "uuid": "0f6958ab-c48a-4b08-9e59-f246318ee8b5"
   },
   "engines": {
-    "node": ">=18.0.0 <=20.x.x",
+    "node": ">=16.0.0 <=20.x.x",
     "npm": ">=6.0.0"
-  },
-  "license": "MIT"
+  }
 }
