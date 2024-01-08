@@ -167,53 +167,7 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="swiper projects__swiper">
-              <div className="swiper-wrapper">
-                <div className="swiper-slide">
-                  <a href="#" className="projects__item-link">
-                    <div className="projects__item">
-                      <figure>
-                        <img src="/images/big-boss.webp" alt="" />
-                        <figcaption>Big boss</figcaption>
-                      </figure>
-                    </div>
-                  </a>
-                </div>
-                <div className="swiper-slide">
-                  <a href="#" className="projects__item-link">
-                    <div className="projects__item">
-                      <figure>
-                        <img src="/images/wings.webp" alt="" />
-                        <figcaption>The wings</figcaption>
-                      </figure>
-                    </div>
-                  </a>
-                </div>
-                <div className="swiper-slide">
-                  <a href="#" className="projects__item-link">
-                    <div className="projects__item">
-                      <figure>
-                        <img src="/images/dino-power.webp" alt="" />
-                        <figcaption>Dino power</figcaption>
-                      </figure>
-                    </div>
-                  </a>
-                </div>
-                <div className="swiper-slide">
-                  <a href="404.html" className="projects__item-link">
-                    <div className="projects__item">
-                      <figure>
-                        <img src="/images/radio-ray.webp" alt="" />
-                        <figcaption>Radio ray</figcaption>
-                      </figure>
-                    </div>
-                  </a>
-                </div>
-              </div>
 
-              <div className="swiper-button-prev"></div>
-              <div className="swiper-button-next"></div>
-            </div>
           </section>
 
           <section className="offers">
