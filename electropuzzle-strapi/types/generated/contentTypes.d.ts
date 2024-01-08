@@ -965,6 +965,41 @@ export interface ApiPromoCodePromoCode extends Schema.CollectionType {
   };
 }
 
+export interface ApiShippingCostShippingCost extends Schema.CollectionType {
+  collectionName: 'shipping_costs';
+  info: {
+    singularName: 'shipping-cost';
+    pluralName: 'shipping-costs';
+    displayName: 'Shipping Cost';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cost: Attribute.Decimal & Attribute.Required;
+    location: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 1;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::shipping-cost.shipping-cost',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::shipping-cost.shipping-cost',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -985,6 +1020,7 @@ declare module '@strapi/types' {
       'api::order.order': ApiOrderOrder;
       'api::pedal.pedal': ApiPedalPedal;
       'api::promo-code.promo-code': ApiPromoCodePromoCode;
+      'api::shipping-cost.shipping-cost': ApiShippingCostShippingCost;
     }
   }
 }
