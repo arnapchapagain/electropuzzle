@@ -12,6 +12,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@a2seven/yoo-checkout": "^1.1.4",
     "@strapi/admin": "^4.14.3",
     "@strapi/plugin-graphql": "^4.12.3",
     "@strapi/plugin-i18n": "4.12.7",
@@ -20,8 +21,7 @@
     "@strapi/strapi": "^4.14.3",
     "better-sqlite3": "8.5.0",
     "strapi-plugin-email-designer": "^2.2.1",
-    "strapi-plugin-heroicons-field": "^0.0.3",
-    "yookassa": "^0.1.1"
+    "strapi-plugin-heroicons-field": "^0.0.3"
   },
   "devDependencies": {
     "patch-package": "^8.0.0",
