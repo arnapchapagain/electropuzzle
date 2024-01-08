@@ -1,0 +1,38 @@
+{
+  "name": "ElectroPuzzle/strapi",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "description": "An ElectroPuzzle admin application",
+  "scripts": {
+    "postinstall": "patch-package",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@a2seven/yoo-checkout": "^1.1.4",
+    "@strapi/admin": "^4.14.3",
+    "@strapi/plugin-graphql": "^4.12.3",
+    "@strapi/plugin-i18n": "4.12.7",
+    "@strapi/plugin-users-permissions": "4.12.7",
+    "@strapi/provider-email-amazon-ses": "^4.14.3",
+    "@strapi/strapi": "^4.14.3",
+    "better-sqlite3": "8.5.0",
+    "joi": "^17.11.0",
+    "strapi-plugin-email-designer": "^2.2.1",
+    "strapi-plugin-heroicons-field": "^0.0.3"
+  },
+  "devDependencies": {
+    "patch-package": "^8.0.0",
+    "prettier": "^3.0.3"
+  },
+  "strapi": {
+    "uuid": "0f6958ab-c48a-4b08-9e59-f246318ee8b5"
+  },
+  "engines": {
+    "node": ">=16.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  }
+}

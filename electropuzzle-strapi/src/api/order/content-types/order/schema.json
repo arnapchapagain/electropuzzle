@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "basket": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::basket.basket"
+    },
+    "full_name": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "phone": {
+      "type": "string",
+      "required": true,
+      "minLength": 8
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "address_street": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "address_apartment": {
+      "type": "string"
+    },
+    "address_floor": {
+      "type": "string"
+    },
+    "address_entrance": {
+      "type": "string"
+    },
+    "address_index": {
+      "type": "string"
+    },
+    "comments": {
+      "type": "text"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "not_started"
+    },
+    "payment_id": {
+      "type": "string",
+      "unique": false
+    }
+  }
+}
