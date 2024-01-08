@@ -3,120 +3,120 @@
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 200;
-  src: url("../../public/fonts/") format("woff");
-  src: url("../../public/fonts/2") format("woff2");
+  src: url("../public/fonts/Montserrat-ExtraLight.woff") format("woff");
+  src: url("../public/fonts/Montserrat-ExtraLight.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 300;
-  src: url("../../public/fonts//Montserrat-Light.woff") format("woff");
-  src: url("../../public/fonts//Montserrat-Light.woff2") format("woff2");
+  src: url("../public/fonts/Montserrat-Light.woff") format("woff");
+  src: url("../public/fonts/Montserrat-Light.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
-  src: url("../../public/fonts//Montserrat-Regular.woff") format("woff");
-  src: url("../../public/fonts//Montserrat-Regular.woff2") format("woff2");
+  src: url("../public/fonts/Montserrat-Regular.woff") format("woff");
+  src: url("../public/fonts/Montserrat-Regular.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
-  src: url("../../public/fonts//Montserrat-Medium.woff") format("woff");
-  src: url("../../public/fonts//Montserrat-Medium.woff2") format("woff2");
+  src: url("../public/fonts/Montserrat-Medium.woff") format("woff");
+  src: url("../public/fonts/Montserrat-Medium.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
-  src: url("../../public/fonts//Montserrat-SemiBold.woff") format("woff");
-  src: url("../../public/fonts//Montserrat-SemiBold.woff2") format("woff2");
+  src: url("../public/fonts/Montserrat-SemiBold.woff") format("woff");
+  src: url("../public/fonts/Montserrat-SemiBold.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
-  src: url("../../public/fonts//Montserrat-Bold.woff") format("woff");
-  src: url("../../public/fonts//Montserrat-Bold.woff2") format("woff2");
+  src: url("../public/fonts/Montserrat-Bold.woff") format("woff");
+  src: url("../public/fonts/Montserrat-Bold.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Rubik";
   font-style: normal;
   font-weight: 300;
-  src: url("../../public/fonts//Rubik-Light.woff") format("woff");
-  src: url("../../public/fonts//Rubik-Light.woff2") format("woff2");
+  src: url("../public/fonts/Rubik-Light.woff") format("woff");
+  src: url("../public/fonts/Rubik-Light.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Rubik";
   font-style: normal;
   font-weight: 400;
-  src: url("../../public/fonts//Rubik-Regular.woff") format("woff");
-  src: url("../../public/fonts//Rubik-Regular.woff2") format("woff2");
+  src: url("../public/fonts/Rubik-Regular.woff") format("woff");
+  src: url("../public/fonts/Rubik-Regular.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Rubik";
   font-style: normal;
   font-weight: 500;
-  src: url("../../public/fonts//Rubik-Medium.woff") format("woff");
-  src: url("../../public/fonts//Rubik-Medium.woff2") format("woff2");
+  src: url("../public/fonts/Rubik-Medium.woff") format("woff");
+  src: url("../public/fonts/Rubik-Medium.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Comfortaa";
   font-style: normal;
   font-weight: 400;
-  src: url("../../public/fonts//Comfortaa-Regular.woff") format("woff");
-  src: url("../../public/fonts//Comfortaa-Regular.woff2") format("woff2");
+  src: url("../public/fonts/Comfortaa-Regular.woff") format("woff");
+  src: url("../public/fonts/Comfortaa-Regular.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Comfortaa";
   font-style: normal;
   font-weight: 400;
-  src: url("../../public/fonts//Comfortaa-Bold.woff") format("woff");
-  src: url("../../public/fonts//Comfortaa-Bold.woff2") format("woff2");
+  src: url("../public/fonts/Comfortaa-Bold.woff") format("woff");
+  src: url("../public/fonts/Comfortaa-Bold.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Lato";
   font-style: normal;
   font-weight: 400;
-  src: url("../../public/fonts//Lato-Regular.woff") format("woff");
-  src: url("../../public/fonts//Lato-Regular.woff2") format("woff2");
+  src: url("../public/fonts/Lato-Regular.woff") format("woff");
+  src: url("../public/fonts/Lato-Regular.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  src: url("../../public/fonts//Roboto-Bold.woff") format("woff");
-  src: url("../../public/fonts//Roboto-Bold.woff2") format("woff2");
+  src: url("../public/fonts/Roboto-Bold.woff") format("woff");
+  src: url("../public/fonts/Roboto-Bold.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "OpenSans";
   font-style: normal;
   font-weight: 700;
-  src: url("../../public/fonts//OpenSans-Bold.woff") format("woff");
-  src: url("../../public/fonts//OpenSans-Bold.woff2") format("woff2");
+  src: url("../public/fonts/OpenSans-Bold.woff") format("woff");
+  src: url("../public/fonts/OpenSans-Bold.woff2") format("woff2");
 }
 @font-face {
   font-display: swap;
   font-family: "PTMono";
   font-style: normal;
   font-weight: 400;
-  src: url("../../public/fonts//PTMono-Regular.woff") format("woff");
-  src: url("../../public/fonts//PTMono-Regular.woff2") format("woff2");
+  src: url("../public/fonts/PTMono-Regular.woff") format("woff");
+  src: url("../public/fonts/PTMono-Regular.woff2") format("woff2");
 }
 html {
   -webkit-box-sizing: border-box;
@@ -2767,5 +2767,75 @@ video {
   }
   .counter button:active {
     color: #4f8a21;
+  }
+}
+
+/* contacts page */
+
+@media screen and (max-width: 1024px) {
+  html,
+  body {
+    font-size: calc(100vw / 1024 * 10);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  html,
+  body {
+    font-size: calc(100vw / 640 * 10);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  html,
+  body {
+    font-size: calc(100vw / 420 * 10);
+  }
+}
+
+/* product page */
+
+@media screen and (min-width: 1536px) {
+  .projects {
+    padding: 35px !important;
+  }
+
+  .projects__item-img {
+    height: 315px !important;
+    width: 315px !important;
+  }
+
+  .projects__head {
+    margin-bottom: 20px !important;
+  }
+
+  .projects__icon {
+    margin-right: 15px !important;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  html,
+  body {
+    font-size: calc(100vw / 1024 * 10);
+  }
+
+  .projects__item-img {
+    width: 23.5rem;
+    height: 23.5rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  html,
+  body {
+    font-size: calc(100vw / 640 * 10);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  html,
+  body {
+    font-size: calc(100vw / 420 * 10);
   }
 }
