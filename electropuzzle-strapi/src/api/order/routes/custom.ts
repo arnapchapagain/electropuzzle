@@ -2,12 +2,12 @@ export default {
     routes: [
       { 
         method: 'POST',
-        path: '/order', 
+        path: '/orders', 
         handler: 'order.create',
       },
       {
         method: 'GET',
-        path: '/order/success',
+        path: '/orders/success',
         handler: 'order.success',
       }
     ]
