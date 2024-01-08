@@ -677,6 +677,55 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface PluginEmailDesignerEmailTemplate
+  extends Schema.CollectionType {
+  collectionName: 'email_templates';
+  info: {
+    singularName: 'email-template';
+    pluralName: 'email-templates';
+    displayName: 'Email-template';
+    name: 'email-template';
+  };
+  options: {
+    draftAndPublish: false;
+    timestamps: true;
+    increments: true;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    templateReferenceId: Attribute.Integer & Attribute.Unique;
+    design: Attribute.JSON;
+    name: Attribute.String;
+    subject: Attribute.String;
+    bodyHtml: Attribute.Text;
+    bodyText: Attribute.Text;
+    enabled: Attribute.Boolean & Attribute.DefaultTo<true>;
+    tags: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::email-designer.email-template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::email-designer.email-template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiBasketBasket extends Schema.CollectionType {
   collectionName: 'baskets';
   info: {
@@ -705,6 +754,37 @@ export interface ApiBasketBasket extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::basket.basket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNewsletterEmailNewsletterEmail
+  extends Schema.CollectionType {
+  collectionName: 'newsletter_emails';
+  info: {
+    singularName: 'newsletter-email';
+    pluralName: 'newsletter-emails';
+    displayName: 'Newsletter Email';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    email: Attribute.Email & Attribute.Required & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::newsletter-email.newsletter-email',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::newsletter-email.newsletter-email',
       'oneToOne',
       'admin::user'
     > &
@@ -1011,7 +1091,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'plugin::email-designer.email-template': PluginEmailDesignerEmailTemplate;
       'api::basket.basket': ApiBasketBasket;
+      'api::newsletter-email.newsletter-email': ApiNewsletterEmailNewsletterEmail;
       'api::order.order': ApiOrderOrder;
       'api::pedal.pedal': ApiPedalPedal;
       'api::promo-code.promo-code': ApiPromoCodePromoCode;
