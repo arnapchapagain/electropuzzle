@@ -903,7 +903,7 @@ export interface ApiPedalPedal extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    videoes: Attribute.Media &
+    videos: Attribute.Media &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
