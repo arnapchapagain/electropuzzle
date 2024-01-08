@@ -83,7 +83,7 @@ export default factories.createCoreController(
             },
             confirmation: {
                 type: 'redirect',
-                return_url: 'http://localhost:1337/api/order/confirm'
+                return_url: process.env.CHECKOUT_SUCCESS_URL || 'http://localhost:1337/success'
             }
         };
 
@@ -116,7 +116,8 @@ export default factories.createCoreController(
         }
       },
 
-      async confirm(ctx) {
+      async success(ctx) {
+        ctx.body = 'success';
       }
     })
   );
