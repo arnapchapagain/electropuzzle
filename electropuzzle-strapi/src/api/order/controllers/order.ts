@@ -78,7 +78,7 @@ export default factories.createCoreController(
             },
             confirmation: {
                 type: 'redirect',
-                return_url: 'http://localhost:1337/order/confirm'
+                return_url: 'http://localhost:1337/api/order/confirm'
             }
         };
 
@@ -101,7 +101,6 @@ export default factories.createCoreController(
       },
 
       async confirm(ctx) {
-        ctx.body = 'Payment confirmed';
       }
     })
   );

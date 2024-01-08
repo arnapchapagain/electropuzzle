@@ -6,7 +6,7 @@ export default {
         handler: 'order.create',
       },
       {
-        method: 'POST',
+        method: 'GET',
         path: '/order/confirm',
         handler: 'order.confirm',
       }
