@@ -761,6 +761,46 @@ export interface ApiBasketBasket extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    value: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
+    description: Attribute.RichText;
+    type: Attribute.Enumeration<['Main', 'Series']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'Main'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNewsletterEmailNewsletterEmail
   extends Schema.CollectionType {
   collectionName: 'newsletter_emails';
@@ -830,6 +870,9 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     address_entrance: Attribute.String;
     address_index: Attribute.String;
     comments: Attribute.Text;
+    status: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'not_started'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -866,23 +909,6 @@ export interface ApiPedalPedal extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    category: Attribute.Enumeration<
-      [
-        'Overdrive',
-        'Distortion',
-        'Fuzy',
-        'Compressors',
-        'Modulation and Delay',
-        'Filtering and EQ',
-        'Boosters'
-      ]
-    > &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -972,6 +998,11 @@ export interface ApiPedalPedal extends Schema.CollectionType {
       'api::pedal.pedal',
       'oneToMany',
       'api::promo-code.promo-code'
+    >;
+    categories: Attribute.Relation<
+      'api::pedal.pedal',
+      'oneToMany',
+      'api::category.category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1093,6 +1124,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::email-designer.email-template': PluginEmailDesignerEmailTemplate;
       'api::basket.basket': ApiBasketBasket;
+      'api::category.category': ApiCategoryCategory;
       'api::newsletter-email.newsletter-email': ApiNewsletterEmailNewsletterEmail;
       'api::order.order': ApiOrderOrder;
       'api::pedal.pedal': ApiPedalPedal;
