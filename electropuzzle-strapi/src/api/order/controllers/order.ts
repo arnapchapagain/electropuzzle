@@ -38,7 +38,8 @@ const createOrderInterface = Joi.object({
   address_index: Joi.string(),
   address_floor: Joi.string(),
   address_entrance: Joi.string(),
-  comments: Joi.string()
+  comments: Joi.string(),
+  payment_id: Joi.string()
 });
 
 interface ICreateOrderInterface {
@@ -54,6 +55,7 @@ interface ICreateOrderInterface {
   address_floor?: string;
   address_entrance?: string;
   comments?: string;
+  payment_id?: string;
 }
 
 // This is a constant that is used to ensure idempotency of the payment creation request.
@@ -69,6 +71,7 @@ export default factories.createCoreController(
           return ctx.badRequest(error)
         }
         const body: ICreateOrderInterface = value;
+        body.status = 'started';
 
         const payload: ICreatePayment = {
             amount: {
@@ -98,6 +101,16 @@ export default factories.createCoreController(
               order_id: orderId,
               payment_info: payment
             });
+
+            let paymentId = payment.id;
+
+            await strapi.entityService.update('api::order.order', orderId, {
+              data: {
+                payment_id: paymentId,
+                status: 'pending'
+              },
+            });
+
         } catch (error) {
              ctx.badRequest(error)
         }

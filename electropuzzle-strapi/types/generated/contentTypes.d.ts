@@ -873,6 +873,7 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     status: Attribute.String &
       Attribute.Required &
       Attribute.DefaultTo<'not_started'>;
+    payment_id: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

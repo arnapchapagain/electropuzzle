@@ -55,6 +55,10 @@
       "type": "string",
       "required": true,
       "default": "not_started"
+    },
+    "payment_id": {
+      "type": "string",
+      "unique": false
     }
   }
 }
