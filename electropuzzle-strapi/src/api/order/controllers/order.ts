@@ -93,6 +93,7 @@ export default factories.createCoreController(
         
         try {
             const payment = await checkout.createPayment(payload, IDEMPOTENCY_KEY);
+            ctx.response.status = 201;
             ctx.send({
               order_id: orderId,
               payment_info: payment
