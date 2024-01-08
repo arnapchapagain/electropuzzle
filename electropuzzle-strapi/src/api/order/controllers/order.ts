@@ -33,6 +33,7 @@ const createOrderInterface = Joi.object({
   phone: Joi.string().required(),
   email: Joi.string().email().required(),
   address_street: Joi.string().required(),
+  status: Joi.string().required(),
   address_apartment: Joi.string(),
   address_index: Joi.string(),
   address_floor: Joi.string(),
@@ -47,6 +48,7 @@ interface ICreateOrderInterface {
   phone: string;
   email: string;
   address_street: string;
+  status: string;
   address_apartment?: string;
   address_index?: string;
   address_floor?: string;
