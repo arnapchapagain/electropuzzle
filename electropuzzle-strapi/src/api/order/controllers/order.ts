@@ -66,12 +66,30 @@ export default factories.createCoreController(
     ({ strapi }) => ({
   
       async create(ctx) {
+
+        await this.validateQuery(ctx);
+
+        // Validate request body
         const { error, value } = createOrderInterface.validate(ctx.request.body);
-        if (error) {
-          return ctx.badRequest(error)
-        }
-        const body: ICreateOrderInterface = value;
-        body.status = 'started';
+        if (error) return ctx.badRequest(error)
+        
+        const body = value as ICreateOrderInterface;
+
+        // check if the basket_id provived by user is valid
+        const basket = await strapi.db.query('api::basket.basket').findOne({
+          select: ['*'],
+          where: { id: body.basket_id },
+          populate: { category: true },
+        });
+        if (!basket) return ctx.badRequest('Basket not found');
+
+        body.status = 'not_completed';
+        const entry = await strapi.entityService.create('api::order.order', {
+          data: {
+            ...body
+          }
+        });
+        let orderId = entry.id;
 
         const payload: ICreatePayment = {
             amount: {
@@ -83,32 +101,25 @@ export default factories.createCoreController(
             },
             confirmation: {
                 type: 'redirect',
-                return_url: process.env.CHECKOUT_SUCCESS_URL || 'http://localhost:1337/success'
+                return_url: process.env.CHECKOUT_SUCCESS_URL || 'http://localhost:1337/orders/success?order_id=' + orderId
             }
         };
-
-        const entry = await strapi.entityService.create('api::order.order', {
-          data: {
-            ...body
-          }
-        });
-        let orderId = entry.id;
         
         try {
             const payment = await checkout.createPayment(payload, IDEMPOTENCY_KEY);
-            ctx.response.status = 201;
-            ctx.send({
-              order_id: orderId,
-              payment_info: payment
-            });
 
-            let paymentId = payment.id;
-
+            // update order with payment_id and status
             await strapi.entityService.update('api::order.order', orderId, {
               data: {
-                payment_id: paymentId,
+                payment_id: payment.id,
                 status: 'pending'
               },
+            });
+
+            // return order_id and payment_info
+            return this.transformResponse({
+              order_id: orderId,
+              payment_info: payment
             });
 
         } catch (error) {
@@ -118,6 +129,7 @@ export default factories.createCoreController(
 
       async success(ctx) {
         ctx.body = 'success';
+        console.log(ctx.request.query);
       }
     })
   );
