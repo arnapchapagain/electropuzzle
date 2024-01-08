@@ -677,6 +677,55 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface PluginEmailDesignerEmailTemplate
+  extends Schema.CollectionType {
+  collectionName: 'email_templates';
+  info: {
+    singularName: 'email-template';
+    pluralName: 'email-templates';
+    displayName: 'Email-template';
+    name: 'email-template';
+  };
+  options: {
+    draftAndPublish: false;
+    timestamps: true;
+    increments: true;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    templateReferenceId: Attribute.Integer & Attribute.Unique;
+    design: Attribute.JSON;
+    name: Attribute.String;
+    subject: Attribute.String;
+    bodyHtml: Attribute.Text;
+    bodyText: Attribute.Text;
+    enabled: Attribute.Boolean & Attribute.DefaultTo<true>;
+    tags: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::email-designer.email-template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::email-designer.email-template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiBasketBasket extends Schema.CollectionType {
   collectionName: 'baskets';
   info: {
@@ -854,7 +903,7 @@ export interface ApiPedalPedal extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    videoes: Attribute.Media &
+    videos: Attribute.Media &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -878,11 +927,6 @@ export interface ApiPedalPedal extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    promo_codes: Attribute.Relation<
-      'api::pedal.pedal',
-      'manyToMany',
-      'api::promo-code.promo-code'
-    >;
     slug: Attribute.UID &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -893,6 +937,11 @@ export interface ApiPedalPedal extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
+    promo_codes: Attribute.Relation<
+      'api::pedal.pedal',
+      'oneToMany',
+      'api::promo-code.promo-code'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -942,11 +991,6 @@ export interface ApiPromoCodePromoCode extends Schema.CollectionType {
         min: 0;
         max: 100;
       }>;
-    pedals: Attribute.Relation<
-      'api::promo-code.promo-code',
-      'manyToMany',
-      'api::pedal.pedal'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1016,6 +1060,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'plugin::email-designer.email-template': PluginEmailDesignerEmailTemplate;
       'api::basket.basket': ApiBasketBasket;
       'api::order.order': ApiOrderOrder;
       'api::pedal.pedal': ApiPedalPedal;

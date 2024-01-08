@@ -105,7 +105,7 @@
         }
       }
     },
-    "videoes": {
+    "videos": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -142,12 +142,6 @@
       },
       "type": "json"
     },
-    "promo_codes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::promo-code.promo-code",
-      "mappedBy": "pedals"
-    },
     "slug": {
       "pluginOptions": {
         "i18n": {
@@ -157,6 +151,11 @@
       "type": "uid",
       "required": true,
       "minLength": 1
+    },
+    "promo_codes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::promo-code.promo-code"
     }
   }
 }

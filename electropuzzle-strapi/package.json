@@ -19,11 +19,13 @@
     "@strapi/provider-email-amazon-ses": "^4.14.3",
     "@strapi/strapi": "^4.14.3",
     "better-sqlite3": "8.5.0",
-    "strapi-plugin-heroicons-field": "^0.0.3"
+    "strapi-plugin-email-designer": "^2.2.1",
+    "strapi-plugin-heroicons-field": "^0.0.3",
+    "yookassa": "^0.1.1"
   },
   "devDependencies": {
-    "prettier": "^3.0.3",
-    "patch-package": "^8.0.0"
+    "patch-package": "^8.0.0",
+    "prettier": "^3.0.3"
   },
   "strapi": {
     "uuid": "0f6958ab-c48a-4b08-9e59-f246318ee8b5"
