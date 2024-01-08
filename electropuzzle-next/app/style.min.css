@@ -1532,6 +1532,7 @@ label {
   -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 40px;
+  gap: 40px;
 }
 .product-item__img-block {
   width: 655px;

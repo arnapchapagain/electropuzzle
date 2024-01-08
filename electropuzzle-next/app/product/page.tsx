@@ -1,8 +1,18 @@
+'use client'
+
 import Script from "next/script";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 
+import Carousel  from 'reactjs-nextjs-carousel';
+
 export default function ProductPage() {
+  const slides = [
+    "https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ",
+    "https://fastly.picsum.photos/id/13/2500/1667.jpg?hmac=SoX9UoHhN8HyklRA4A3vcCWJMVtiBXUg0W4ljWTor7s",
+    "https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w",
+   ]
+
     return (
         <>
         <Navbar />
@@ -49,51 +59,21 @@ export default function ProductPage() {
                   <p className="product-content__main-subtitle">
                     Основан на: Marshall Bluesbreaker
                   </p>
-                  <div className="product-item__img-block">
-                    <div className="product-item__img-main">
-                      <img
-                        src="images/product-main.webp"
-                        alt=""
-                        className="product-item__img-m"
-                        id="product-main-img"
+
+                  {/* products image carousel */}
+                  <div style={{flex: 2}}>
+                    <div className="w-full">
+                    <Carousel 
+                      slides={slides} 
+                      thumbWidth={"280rem"}
+                      autoSlide={false} 
+                      carouselWidth={"70rem"} 
                       />
                     </div>
-                    <div className="product-item__img-little">
-                      <img
-                        src="images/product-little-one.webp"
-                        alt=""
-                        className="product-item__img-l"
-                        // onClick={() => changeImage('images/product-main.webp')}
-                      />
-                      <img
-                        src="images/product-little-two.webp"
-                        alt=""
-                        className="product-item__img-l"
-                        // onClick={() => changeImage('images/product-little-two-4x.webp')}
-                      />
-                      <img
-                        src="images/product-little-three.webp"
-                        alt=""
-                        className="product-item__img-l"
-                        // onClick={() => changeImage('images/product-little-three-4x.webp')}
-                      />
-                      <img
-                        src="images/product-little-vour.webp"
-                        alt=""
-                        className="product-item__img-l"
-                        // onClick={() => changeImage('images/product-little-vour-4x.webp')}
-                      />
-                    </div>
+                    
                   </div>
 
-                  <Script>
-                    {`function changeImage(imageSrc) {
-                      var mainImage = document.getElementById("product-main-img");
-                      mainImage.src = imageSrc;
-                    }`}
-                  </Script>
-
-                  <div className="product-item__info">
+                  <div className="product-item__info" style={{flex: 3}}>
                     <h3 className="product-content__title product-item__title">
                       Morning coffee
                     </h3>
@@ -349,6 +329,7 @@ export default function ProductPage() {
             </div>
             
           </main>
+          
           <section className="projects product-projects">
             <div className="container">
               <div className="projects__head">
@@ -361,6 +342,7 @@ export default function ProductPage() {
                 />
                 <h2 className="projects__title">Возможно подойдет.</h2>
               </div>
+
               <div className="projects__content">
                 <a href="#" className="projects__item-link">
                   <div className="projects__item">
@@ -415,8 +397,9 @@ export default function ProductPage() {
                 </a>
               </div>
               
+              {/* product image carousel */}
               <div className="swiper projects__swiper">
-                
+              
                 <div className="swiper-wrapper">
                   
                   <div className="swiper-slide">
@@ -461,7 +444,6 @@ export default function ProductPage() {
                   </div>
                 </div>
 
-                
                 <div className="swiper-button-prev"></div>
                 <div className="swiper-button-next"></div>
               </div>
