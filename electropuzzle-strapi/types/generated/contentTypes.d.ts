@@ -807,7 +807,8 @@ export interface ApiNewsletterEmailNewsletterEmail
   info: {
     singularName: 'newsletter-email';
     pluralName: 'newsletter-emails';
-    displayName: 'Newsletter Email';
+    displayName: 'Newsletter';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -955,7 +956,7 @@ export interface ApiPedalPedal extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    additional_imgages: Attribute.Media &
+    additional_images: Attribute.Media &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1078,6 +1079,7 @@ export interface ApiShippingCostShippingCost extends Schema.CollectionType {
     singularName: 'shipping-cost';
     pluralName: 'shipping-costs';
     displayName: 'Shipping Cost';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1087,7 +1089,7 @@ export interface ApiShippingCostShippingCost extends Schema.CollectionType {
     location: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
-        maxLength: 1;
+        minLength: 1;
       }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

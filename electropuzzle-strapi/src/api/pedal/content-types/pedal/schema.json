@@ -74,7 +74,7 @@
         }
       }
     },
-    "additional_imgages": {
+    "additional_images": {
       "type": "media",
       "multiple": true,
       "required": false,
