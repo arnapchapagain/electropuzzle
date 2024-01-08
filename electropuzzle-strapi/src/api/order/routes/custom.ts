@@ -7,8 +7,8 @@ export default {
       },
       {
         method: 'GET',
-        path: '/order/confirm',
-        handler: 'order.confirm',
+        path: '/order/success',
+        handler: 'order.success',
       }
     ]
   }
