@@ -11,130 +11,195 @@ const productsList = {
       "data": [
         {
           "attributes": {
-            "name": "Pedal",
-            "category": "Overdrive",
-            "based_on": "gg",
-            "price": 55,
+            "name": "Modi Ji",
+            "based_on": "Indian Government",
+            "price": 69420,
             "stock": 1,
-            "description": "ff",
+            "description": "# Modi Ji \n## The Prime Minister of India\n\nAayega toh modi hi 🔥🔥\nDekh kya raha hai aaise 😡? Modi ji mere bhagwan hai. 😍😘🥰\nOni cha. Use code **bhen-k-lodey** for 69% off 😏🤤🥵🥵",
             "image": {
               "data": {
                 "attributes": {
-                  "name": "electro-puzzle-logo.png",
-                  "url": "/uploads/electro_puzzle_logo_97baf571cd.png",
+                  "name": "Untitled.jpeg",
+                  "url": "/uploads/Untitled_7e5d6e6564.jpeg",
                   "alternativeText": null
                 }
               }
             },
-            "additional_imgages": {
+            "additional_images": {
               "data": []
             },
-            "peculiarity": null,
-            "management": null,
-            "characteristics": null,
-            "promo_codes": {
+            "peculiarity": "Modi ji is more pecular than the pecular word itself. Be careful what you say about him. 2024 mi aayega toh modi hi ",
+            "management": {
+              "first_name": "Modi",
+              "last_name": "Ji"
+            },
+            "characteristics": {
+              "chest": "Very big. 46+ inch",
+              "bicep": "Arnold ke papa"
+            },
+            "slug": "modi-ji",
+            "videos": {
               "data": []
+            },
+            "promo_codes": {
+              "data": [
+                {
+                  "attributes": {
+                    "code": "bhed-k-lodey",
+                    "discount_percentage": 69,
+                    "expiration_date": "2025-01-31"
+                  }
+                },
+                {
+                  "attributes": {
+                    "code": "modi-ji-hot-pics",
+                    "discount_percentage": 100,
+                    "expiration_date": "2023-01-31"
+                  }
+                },
+                {
+                  "attributes": {
+                    "code": "no-barganing",
+                    "discount_percentage": 0,
+                    "expiration_date": "2025-01-31"
+                  }
+                },
+                {
+                  "attributes": {
+                    "code": "rajeshDai",
+                    "discount_percentage": 100,
+                    "expiration_date": "2039-12-31"
+                  }
+                }
+              ]
+            },
+            "categories": {
+              "data": [
+                {
+                  "attributes": {
+                    "type": "Series",
+                    "value": "Black series",
+                    "description": null
+                  }
+                },
+                {
+                  "attributes": {
+                    "type": "Main",
+                    "value": "Overdrive",
+                    "description": null
+                  }
+                }
+              ]
             }
           }
         },
         {
           "attributes": {
-            "name": "gg",
-            "category": "Overdrive",
-            "based_on": "gg",
-            "price": 500,
-            "stock": 30,
-            "description": "gg",
+            "name": "Rajesh Dai",
+            "based_on": "rajesh dai",
+            "price": 1000000,
+            "stock": 10000000,
+            "description": "# Rajesh Dai \n## K sochya bhai, yo ho rajesh dai 🔥🔥\n\nDharahara bhaneko k ho taha xa? **Rajesh dai ko L**\nRajesh dai jasto omnipotent manxe bheteko xas ?\n- Yeti barsa bhayo, still he is our dai 🥰🥰\n\nRajesh dai lai ma yeti maya garchu\n\n```c\nwhile (true){\n    printf(\"I love you rajesh dai x%d\", ++i);\n}\n```\n",
             "image": {
               "data": {
                 "attributes": {
-                  "name": "electro-puzzle-logo.png",
-                  "url": "/uploads/electro_puzzle_logo_97baf571cd.png",
-                  "alternativeText": null
+                  "name": "images.jpeg",
+                  "url": "/uploads/images_70ccd31548.jpeg",
+                  "alternativeText": "Rajesh dai kungfu panda"
                 }
               }
             },
-            "additional_imgages": {
+            "additional_images": {
+              "data": [
+                {
+                  "attributes": {
+                    "name": "images.jpeg",
+                    "url": "/uploads/images_c85d3d9466.jpeg",
+                    "alternativeText": "Rajesh dai never cuts"
+                  }
+                },
+                {
+                  "attributes": {
+                    "name": "images.jpeg",
+                    "url": "/uploads/images_8d238b2351.jpeg",
+                    "alternativeText": "Breaking news"
+                  }
+                },
+                {
+                  "attributes": {
+                    "name": "images.jpeg",
+                    "url": "/uploads/images_674b14c816.jpeg",
+                    "alternativeText": "Rajesh dai's emails"
+                  }
+                },
+                {
+                  "attributes": {
+                    "name": "images.jpeg",
+                    "url": "/uploads/images_6251d64243.jpeg",
+                    "alternativeText": "Rajesh dai horni looks"
+                  }
+                },
+                {
+                  "attributes": {
+                    "name": "images.jpeg",
+                    "url": "/uploads/images_398b4db655.jpeg",
+                    "alternativeText": "Rajesh dai power"
+                  }
+                }
+              ]
+            },
+            "peculiarity": "Rajesh dia is everywhere. I see him in mobile, computer, google, youtube, my bed, toilet, my eyes. uff",
+            "management": {
+              "manager": "rajesh dai doesn't need manager. he manages nepal",
+              "residence": "rajesh dai lives everywhere"
+            },
+            "characteristics": {
+              "feature": "features lekhdai gayo bhaney ta computer ko memory sakki jala."
+            },
+            "slug": "rajesh-dai",
+            "videos": {
               "data": []
             },
-            "peculiarity": null,
-            "management": null,
-            "characteristics": null,
             "promo_codes": {
-              "data": []
+              "data": [
+                {
+                  "attributes": {
+                    "code": "rajeshDai",
+                    "discount_percentage": 100,
+                    "expiration_date": "2039-12-31"
+                  }
+                }
+              ]
+            },
+            "categories": {
+              "data": [
+                {
+                  "attributes": {
+                    "type": "Series",
+                    "value": "Gold series",
+                    "description": null
+                  }
+                },
+                {
+                  "attributes": {
+                    "type": "Main",
+                    "value": "Boosters",
+                    "description": null
+                  }
+                }
+              ]
             }
           }
         }
       ]
     }
   }
-};
+}
 
-export default function ContactsPage() {
+export default function Pedals() {
     return (
       <>
         <Navbar />
-  
-        <nav id="burger-menu" className="burger-nav">
-          <div className="burger-nav__block">
-            <a tabIndex={-1} href="index.html" className="logo burger-nav__logo">
-              <img
-                src="images/logo-black.svg"
-                alt="ElectroPuzzle"
-                className="logo__img burger-nav__logo-img"
-              />
-            </a>
-            <button
-              tabIndex={-1}
-              id="burger-close"
-              className="burger-nav__closes"
-            >
-              <img
-                src="images/cancel.svg"
-                alt=""
-                className="burger-nav__closes-icon"
-              />
-            </button>
-            <ul className="burger-nav__list">
-              <li className="burger-nav__item">
-                <a
-                  tabIndex={-1}
-                  href="index.html"
-                  className="burger-nav__item-link"
-                >
-                  Главная
-                </a>
-              </li>
-              <li className="burger-nav__item">
-                <a
-                  tabIndex={-1}
-                  href="pedals.html"
-                  className="burger-nav__item-link"
-                >
-                  Педали
-                </a>
-              </li>
-              <li className="burger-nav__item">
-                <a
-                  tabIndex={-1}
-                  href="contacts.html"
-                  className="burger-nav__item-link"
-                >
-                  Контакты
-                </a>
-              </li>
-              <li className="burger-nav__item">
-                <a
-                  tabIndex={-1}
-                  href="basket.html"
-                  className="burger-nav__item-link"
-                >
-                  Корзина
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
 
         <section
         className="hero-pedals"
@@ -152,175 +217,118 @@ export default function ContactsPage() {
         </div>
         </section>
 
-        <div id="menu-filters" className="menu-filters">
-            <form id="menu-form-filters" action="" className="menu-filters__form">
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" checked />
-                <span>Все</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Овердрайвы</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Дисторшены</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Фузы</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span>Компрессоры</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Модуляция и Дилеи</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Фильтрация и EQ</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Бустеры</span>
-                </label>
-                <button
-                
-                id="menu-form-btn"
-                type="submit"
-                className="menu-filters__btn"
-                >
-                Применить
-                </button>
-            </form>
-        </div>
-
         <div className="wrapper">
             <main className="main main-pedals">
                 <div className="container pedals-container">
-                <div className="btn-filters-block">
-                    <button id="filters-btn" className="btn-filters">
-                    Фильтр
-                    </button>
-                </div>
-                <section className="content main-pedals__content">
-                    <aside className="filters content__filters">
-                    <h2 className="filters__title">Фильтр</h2>
-                    <div className="filters__item">
-                        <h3 className="filters__item-title">
-                        Категории<svg
-                            className="filters__item-icon"
-                            width="21"
-                            height="3"
-                            viewBox="0 0 21 3"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <line
-                            x1="0.916992"
-                            y1="1.5"
-                            x2="20.917"
-                            y2="1.5"
-                            stroke="black"
-                            stroke-width="2"
-                            />
-                        </svg>
-                        </h3>
-                        <form action="" className="filters__form">
-                        <label className="filters__item-btn">
-                            <input type="checkbox" checked />
-                            <span className="filters__item-text"
-                            >Все<span className="filters__item-num">115</span></span>
-                        </label>
+                <section className="content main-pedals__content" style={{display: "flex", flexWrap: "wrap"}}>
+                    <aside className="filters content__filters" style={{flex: 1}}>
+                      <h2 className="filters__title">Фильтр</h2>
+                      <div className="filters__item">
+                          <h3 className="filters__item-title">
+                          Категории<svg
+                              className="filters__item-icon"
+                              width="21"
+                              height="3"
+                              viewBox="0 0 21 3"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                          >
+                              <line
+                              x1="0.916992"
+                              y1="1.5"
+                              x2="20.917"
+                              y2="1.5"
+                              stroke="black"
+                              stroke-width="2"
+                              />
+                          </svg>
+                          </h3>
+                          <form action="" className="filters__form">
+                          <label className="filters__item-btn">
+                              <input type="checkbox" checked />
+                              <span className="filters__item-text"
+                              >Все<span className="filters__item-num">115</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Овердрайвы<span className="filters__item-num">15</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Овердрайвы<span className="filters__item-num">15</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Дисторшены<span className="filters__item-num">11</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Дисторшены<span className="filters__item-num">11</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Фузы<span className="filters__item-num">25</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Фузы<span className="filters__item-num">25</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Компрессоры<span className="filters__item-num">2</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Компрессоры<span className="filters__item-num">2</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Модуляция и Дилеи<span className="filters__item-num">3</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Модуляция и Дилеи<span className="filters__item-num">3</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text">Фильтрация и EQ<span className="filters__item-num">2</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text">Фильтрация и EQ<span className="filters__item-num">2</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text">Бустеры<span className="filters__item-num">5</span></span>
-                        </label>
-                        </form>
-                    </div>
-                    <div className="filters__item">
-                        <h3 className="filters__item-title">
-                        Серия<svg
-                            className="filters__item-icon"
-                            width="21"
-                            height="3"
-                            viewBox="0 0 21 3"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <line
-                            x1="0.916992"
-                            y1="1.5"
-                            x2="20.917"
-                            y2="1.5"
-                            stroke="black"
-                            stroke-width="2"
-                            />
-                        </svg>
-                        </h3>
-                        <form action="" className="filters__form">
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Black series<span className="filters__item-num">115</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text">Бустеры<span className="filters__item-num">5</span></span>
+                          </label>
+                          </form>
+                      </div>
+                      <div className="filters__item">
+                          <h3 className="filters__item-title">
+                          Серия<svg
+                              className="filters__item-icon"
+                              width="21"
+                              height="3"
+                              viewBox="0 0 21 3"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                          >
+                              <line
+                              x1="0.916992"
+                              y1="1.5"
+                              x2="20.917"
+                              y2="1.5"
+                              stroke="black"
+                              stroke-width="2"
+                              />
+                          </svg>
+                          </h3>
+                          <form action="" className="filters__form">
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Black series<span className="filters__item-num">115</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Gold series<span className="filters__item-num">0</span></span>
-                        </label>
-                        </form>
-                    </div>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Gold series<span className="filters__item-num">0</span></span>
+                          </label>
+                          </form>
+                      </div>
                     </aside>
 
                     {/* product list */}
-                    <section className="goods content__goods">
+                    <section className="goods content__goods" style={{flex: 2}}>
                         {
                             (productsList.data.pedals.data.length > 0) ? 
                             (
