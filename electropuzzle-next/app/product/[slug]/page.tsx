@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { addToBasket } from "@/verdor/basket/basket";
 
 export default function Page({params}) {
-  console.log(params.slug)
+  const [orderQuantity, setOrderQuantity] = useState(1);
 
   const [pedalData, setPedalData] = useState(null);
   const [isError, setError] = useState(null);
@@ -124,9 +124,19 @@ export default function Page({params}) {
                 <div className="product-item__sum">
                   <form id="form-sum" className="product-item__form" action="">
                     <div className="counter">
-                      <button type="button" id="decrease">-</button>
-                      <input type="text" id="count" value="1" name="sum" />
-                      <button type="button" id="increase">+</button>
+                      <button 
+                      type="button"
+                      onClick={() => {
+                        if (orderQuantity > 0) {setOrderQuantity(prev => prev-1)}
+                      }}>-</button>
+
+                      <input type="text" id="count" value={orderQuantity} name="sum" />
+
+                      <button 
+                      type="button"
+                      onClick={() => {
+                        setOrderQuantity(prev => prev+1)
+                      }}>+</button>
                     </div>
                   </form>
 
@@ -142,7 +152,7 @@ export default function Page({params}) {
                   <button className="product-item__btn-basket" onClick={() => {
                         addToBasket({
                           productSlug: `${params.slug}`,
-                          quantity: 1,
+                          quantity: orderQuantity,
                         });
                       }}>
                     Добавить в корзину

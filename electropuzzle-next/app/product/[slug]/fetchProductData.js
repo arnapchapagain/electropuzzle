@@ -1,5 +1,7 @@
+import BACKEND_URI from "../../data.js";
+
 export default async function fetchProductData (params, setPedalData, setLoading, setError) {
-    const url = 'http://localhost:1337/graphql';
+    const url = `${BACKEND_URI}/graphql`;
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
