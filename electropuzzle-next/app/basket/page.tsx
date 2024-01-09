@@ -2,72 +2,15 @@
 
 import Script from "next/script";
 import Navbar from "../components/Navbar/Navbar";
+import { deleteFromBasket, getBasket } from "@/verdor/basket/basket";
+import { getProductBySlug } from "@/data/pedals";
+import { useState } from "react";
 
 export default function BasketPage() {
+  const [basket, setBasket] = useState<any>(getBasket());
   return (
     <>
       <Navbar />
-
-      <nav id="burger-menu" className="burger-nav">
-        <div className="burger-nav__block">
-          <a tabIndex={-1} href="index.html" className="logo burger-nav__logo">
-            <img
-              src="images/logo-black.svg"
-              alt="ElectroPuzzle"
-              className="logo__img burger-nav__logo-img"
-            />
-          </a>
-          <button
-            tabIndex={-1}
-            id="burger-close"
-            className="burger-nav__closes"
-          >
-            <img
-              src="images/cancel.svg"
-              alt=""
-              className="burger-nav__closes-icon"
-            />
-          </button>
-          <ul className="burger-nav__list">
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="index.html"
-                className="burger-nav__item-link"
-              >
-                Главная
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="pedals.html"
-                className="burger-nav__item-link"
-              >
-                Педали
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="contacts.html"
-                className="burger-nav__item-link"
-              >
-                Контакты
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="basket.html"
-                className="burger-nav__item-link"
-              >
-                Корзина
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
 
       <div className="wrapper">
         <main className="main main-basket">
@@ -75,41 +18,19 @@ export default function BasketPage() {
             <div className="basket-content">
               <div className="basket-content__block">
                 <section className="basket-goods basket-content__goods">
-                  <h3 className="basket-content__title">Корзина</h3>
-                  <div
-                    id="basketItem1"
-                    className="basket-goods__item basket-item"
-                  >
-                    <img
-                      src="images/basket-goods.webp"
-                      alt=""
-                      className="basket-goods__img"
-                    />
-                    <div className="basket-goods__name">
-                      <h3 className="basket-goods__item-title">
-                        Morning coffee
-                      </h3>
-                      <p className="basket-goods__ver">Вариант: Стандарт</p>
-                    </div>
-                    <div className="basket-goods__info">
-                      <p className="basket-goods__price">11000.00 ₽</p>
-                      <p className="basket-goods__sum">Количество: 1 шт</p>
-                    </div>
-                    <button
-                      id="basket-goods-btn"
-                      className="basket-goods__btn"
-                      onClick={() => toggleBlock("basketItem1")}
-                    >
-                      <img
-                        src="images/trash-icon.svg"
-                        alt=""
-                        className="basket-goods__btn-img"
-                      />
-                    </button>
-                  </div>
-                  <div id="empty" className="empty">
-                    Пусто
-                  </div>
+                  {basket.map(
+                    (
+                      product: { productSlug: string; quantity: number },
+                      index: number
+                    ) => (
+                      <div key={index}>
+                        <EachBasketProduct
+                          quantity={product.quantity}
+                          productSlug={product.productSlug}
+                        />
+                      </div>
+                    )
+                  )}
                 </section>
                 <section className="basket-info basket-content__info">
                   <h3 className="basket-content__title">
@@ -519,5 +440,51 @@ export default function BasketPage() {
         </div>
       </div>
     </>
+  );
+}
+
+function EachBasketProduct({
+  productSlug,
+  quantity,
+}: {
+  productSlug: string;
+  quantity: number;
+}) {
+  const product = getProductBySlug(productSlug);
+
+  return (
+    <div>
+      {/* <h3 className="basket-content__title"></h3> */}
+      <div id="basketItem1" className="basket-goods__item basket-item">
+        <img
+          src="images/basket-goods.webp"
+          alt=""
+          className="basket-goods__img"
+        />
+        <div className="basket-goods__name">
+          <h3 className="basket-goods__item-title">
+            {product?.attributes.name}
+          </h3>
+          <p className="basket-goods__ver">Вариант: Стандарт</p>
+        </div>
+        <div className="basket-goods__info">
+          <p className="basket-goods__price">{product?.attributes.price} ₽</p>
+          <p className="basket-goods__sum">Количество: {quantity} шт</p>
+        </div>
+        <button id="basket-goods-btn" className="basket-goods__btn">
+          <img
+            onClick={() => {
+              deleteFromBasket({ productSlug: productSlug, quantity: 1 });
+            }}
+            src="images/trash-icon.svg"
+            alt=""
+            className="basket-goods__btn-img"
+          />
+        </button>
+      </div>
+      <div id="empty" className="empty">
+        Пусто
+      </div>
+    </div>
   );
 }
