@@ -203,14 +203,9 @@ export default function Page({params}:  {params: any}) {
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <Video src={myVideo} />
+                <Video src={BACKEND_URI + mainProductData?.videos?.data[0]?.attributes?.url} />
               </div>
-              <div
-                // onClick={() => openVideo('videos/video-one.mp4')}
-                className="product-video__item"
-              >
-                <img src="images/video-two.webp" alt="" />
-              </div>
+
               <div
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
