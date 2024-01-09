@@ -1040,6 +1040,8 @@ input:focus {
 .goods__img {
   width: 295px;
   height: 295px;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
   margin-bottom: auto;
 }
 .goods__item-title {
