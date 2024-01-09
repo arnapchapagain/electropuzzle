@@ -795,6 +795,7 @@ input:focus {
 .filters {
   font-size: 20px;
   width: 285px;
+  min-width: 285px;
   font-weight: 300;
   margin-right: auto;
 }
@@ -1026,7 +1027,7 @@ input:focus {
   height: 100%;
 }
 .goods__item-link {
-  width: 295px;
+  width: 395px;
 }
 .goods__item-link:not(:nth-child(3n)) {
   margin-right: 22px;
@@ -2041,7 +2042,7 @@ video {
     width: 230px;
   }
   .goods {
-    width: 740px;
+    width: max-content;
   }
   .goods__item-link {
     width: 233px;
@@ -2183,14 +2184,12 @@ video {
   .btn-filters-block {
     display: block;
   }
-  .filters {
-    display: none;
-  }
+}
   .goods {
     width: 100%;
   }
   .goods__item-link {
-    width: 31.5%;
+    width: 335px;
   }
   .goods__item-text {
     display: none;

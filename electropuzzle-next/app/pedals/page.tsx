@@ -70,71 +70,10 @@ const productsList = {
   }
 };
 
-export default function ContactsPage() {
+export default function Pedals() {
     return (
       <>
         <Navbar />
-  
-        <nav id="burger-menu" className="burger-nav">
-          <div className="burger-nav__block">
-            <a tabIndex={-1} href="index.html" className="logo burger-nav__logo">
-              <img
-                src="images/logo-black.svg"
-                alt="ElectroPuzzle"
-                className="logo__img burger-nav__logo-img"
-              />
-            </a>
-            <button
-              tabIndex={-1}
-              id="burger-close"
-              className="burger-nav__closes"
-            >
-              <img
-                src="images/cancel.svg"
-                alt=""
-                className="burger-nav__closes-icon"
-              />
-            </button>
-            <ul className="burger-nav__list">
-              <li className="burger-nav__item">
-                <a
-                  tabIndex={-1}
-                  href="index.html"
-                  className="burger-nav__item-link"
-                >
-                  Главная
-                </a>
-              </li>
-              <li className="burger-nav__item">
-                <a
-                  tabIndex={-1}
-                  href="pedals.html"
-                  className="burger-nav__item-link"
-                >
-                  Педали
-                </a>
-              </li>
-              <li className="burger-nav__item">
-                <a
-                  tabIndex={-1}
-                  href="contacts.html"
-                  className="burger-nav__item-link"
-                >
-                  Контакты
-                </a>
-              </li>
-              <li className="burger-nav__item">
-                <a
-                  tabIndex={-1}
-                  href="basket.html"
-                  className="burger-nav__item-link"
-                >
-                  Корзина
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
 
         <section
         className="hero-pedals"
@@ -152,175 +91,118 @@ export default function ContactsPage() {
         </div>
         </section>
 
-        <div id="menu-filters" className="menu-filters">
-            <form id="menu-form-filters" action="" className="menu-filters__form">
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" checked />
-                <span>Все</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Овердрайвы</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Дисторшены</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Фузы</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span>Компрессоры</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Модуляция и Дилеи</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Фильтрация и EQ</span>
-                </label>
-
-                <label className="menu-filters__item-btn">
-                <input type="checkbox" />
-                <span >Бустеры</span>
-                </label>
-                <button
-                
-                id="menu-form-btn"
-                type="submit"
-                className="menu-filters__btn"
-                >
-                Применить
-                </button>
-            </form>
-        </div>
-
         <div className="wrapper">
             <main className="main main-pedals">
                 <div className="container pedals-container">
-                <div className="btn-filters-block">
-                    <button id="filters-btn" className="btn-filters">
-                    Фильтр
-                    </button>
-                </div>
-                <section className="content main-pedals__content">
-                    <aside className="filters content__filters">
-                    <h2 className="filters__title">Фильтр</h2>
-                    <div className="filters__item">
-                        <h3 className="filters__item-title">
-                        Категории<svg
-                            className="filters__item-icon"
-                            width="21"
-                            height="3"
-                            viewBox="0 0 21 3"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <line
-                            x1="0.916992"
-                            y1="1.5"
-                            x2="20.917"
-                            y2="1.5"
-                            stroke="black"
-                            stroke-width="2"
-                            />
-                        </svg>
-                        </h3>
-                        <form action="" className="filters__form">
-                        <label className="filters__item-btn">
-                            <input type="checkbox" checked />
-                            <span className="filters__item-text"
-                            >Все<span className="filters__item-num">115</span></span>
-                        </label>
+                <section className="content main-pedals__content" style={{display: "flex", flexWrap: "wrap"}}>
+                    <aside className="filters content__filters" style={{flex: 1}}>
+                      <h2 className="filters__title">Фильтр</h2>
+                      <div className="filters__item">
+                          <h3 className="filters__item-title">
+                          Категории<svg
+                              className="filters__item-icon"
+                              width="21"
+                              height="3"
+                              viewBox="0 0 21 3"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                          >
+                              <line
+                              x1="0.916992"
+                              y1="1.5"
+                              x2="20.917"
+                              y2="1.5"
+                              stroke="black"
+                              stroke-width="2"
+                              />
+                          </svg>
+                          </h3>
+                          <form action="" className="filters__form">
+                          <label className="filters__item-btn">
+                              <input type="checkbox" checked />
+                              <span className="filters__item-text"
+                              >Все<span className="filters__item-num">115</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Овердрайвы<span className="filters__item-num">15</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Овердрайвы<span className="filters__item-num">15</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Дисторшены<span className="filters__item-num">11</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Дисторшены<span className="filters__item-num">11</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Фузы<span className="filters__item-num">25</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Фузы<span className="filters__item-num">25</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Компрессоры<span className="filters__item-num">2</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Компрессоры<span className="filters__item-num">2</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Модуляция и Дилеи<span className="filters__item-num">3</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Модуляция и Дилеи<span className="filters__item-num">3</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text">Фильтрация и EQ<span className="filters__item-num">2</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text">Фильтрация и EQ<span className="filters__item-num">2</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text">Бустеры<span className="filters__item-num">5</span></span>
-                        </label>
-                        </form>
-                    </div>
-                    <div className="filters__item">
-                        <h3 className="filters__item-title">
-                        Серия<svg
-                            className="filters__item-icon"
-                            width="21"
-                            height="3"
-                            viewBox="0 0 21 3"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <line
-                            x1="0.916992"
-                            y1="1.5"
-                            x2="20.917"
-                            y2="1.5"
-                            stroke="black"
-                            stroke-width="2"
-                            />
-                        </svg>
-                        </h3>
-                        <form action="" className="filters__form">
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Black series<span className="filters__item-num">115</span></span>
-                        </label>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text">Бустеры<span className="filters__item-num">5</span></span>
+                          </label>
+                          </form>
+                      </div>
+                      <div className="filters__item">
+                          <h3 className="filters__item-title">
+                          Серия<svg
+                              className="filters__item-icon"
+                              width="21"
+                              height="3"
+                              viewBox="0 0 21 3"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                          >
+                              <line
+                              x1="0.916992"
+                              y1="1.5"
+                              x2="20.917"
+                              y2="1.5"
+                              stroke="black"
+                              stroke-width="2"
+                              />
+                          </svg>
+                          </h3>
+                          <form action="" className="filters__form">
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Black series<span className="filters__item-num">115</span></span>
+                          </label>
 
-                        <label className="filters__item-btn">
-                            <input type="checkbox" />
-                            <span className="filters__item-text"
-                            >Gold series<span className="filters__item-num">0</span></span>
-                        </label>
-                        </form>
-                    </div>
+                          <label className="filters__item-btn">
+                              <input type="checkbox" />
+                              <span className="filters__item-text"
+                              >Gold series<span className="filters__item-num">0</span></span>
+                          </label>
+                          </form>
+                      </div>
                     </aside>
 
                     {/* product list */}
-                    <section className="goods content__goods">
+                    <section className="goods content__goods" style={{flex: 2}}>
                         {
                             (productsList.data.pedals.data.length > 0) ? 
                             (
