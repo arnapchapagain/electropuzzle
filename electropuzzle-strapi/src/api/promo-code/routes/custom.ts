@@ -1,7 +1,7 @@
 export default {
     routes: [
       { 
-        method: 'GET',
+        method: 'POST',
         path: '/promo-code/check', 
         handler: 'promo-code.check',
       }
