@@ -46,7 +46,6 @@ export default factories.createCoreController(
 
     async success(ctx) {
       ctx.body = "success";
-      console.log(ctx.request.query);
     },
   }),
 );
