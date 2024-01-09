@@ -9,6 +9,7 @@ import fetchProductData from "./fetchProductData.js"
 
 import Carousel  from 'reactjs-nextjs-carousel';
 import { useEffect, useState } from "react";
+import { addToBasket } from "@/verdor/basket/basket";
 
 export default function Page({params}) {
   console.log(params.slug)
@@ -138,7 +139,12 @@ export default function Page({params}) {
                   >
                     Купить в один клик
                   </button>
-                  <button className="product-item__btn-basket">
+                  <button className="product-item__btn-basket" onClick={() => {
+                        addToBasket({
+                          productSlug: `${params.slug}`,
+                          quantity: 1,
+                        });
+                      }}>
                     Добавить в корзину
                   </button>
                 </div>

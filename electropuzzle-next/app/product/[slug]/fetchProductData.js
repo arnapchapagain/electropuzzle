@@ -46,15 +46,6 @@ export default async function fetchProductData (params, setPedalData, setLoading
                 }
               }
             }
-            promo_codes{
-              data{
-                attributes{
-                  code
-                  discount_percentage
-                  expiration_date
-                }
-              }
-            }
             categories{
               data{
                 attributes{

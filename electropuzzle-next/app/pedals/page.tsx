@@ -19,14 +19,22 @@ const productsList = {
             "image": {
               "data": {
                 "attributes": {
-                  "name": "Untitled.jpeg",
-                  "url": "/uploads/Untitled_7e5d6e6564.jpeg",
-                  "alternativeText": null
+                  "name": "POV: Modi Ji",
+                  "url": "/uploads/3xov_Y1edu_Dqa_Dbr_P_Kq2l_Bt_QF_Xd_Raa34xd_S7_GX_Wto_JHE_e9183013cd.webp",
+                  "alternativeText": "Only Modi Ji. No Alt Text"
                 }
               }
             },
             "additional_images": {
-              "data": []
+              "data": [
+                {
+                  "attributes": {
+                    "name": "images.jpeg",
+                    "url": "/uploads/images_6251d64243.jpeg",
+                    "alternativeText": "Rajesh dai horni looks"
+                  }
+                }
+              ]
             },
             "peculiarity": "Modi ji is more pecular than the pecular word itself. Be careful what you say about him. 2024 mi aayega toh modi hi ",
             "management": {
@@ -40,38 +48,6 @@ const productsList = {
             "slug": "modi-ji",
             "videos": {
               "data": []
-            },
-            "promo_codes": {
-              "data": [
-                {
-                  "attributes": {
-                    "code": "bhed-k-lodey",
-                    "discount_percentage": 69,
-                    "expiration_date": "2025-01-31"
-                  }
-                },
-                {
-                  "attributes": {
-                    "code": "modi-ji-hot-pics",
-                    "discount_percentage": 100,
-                    "expiration_date": "2023-01-31"
-                  }
-                },
-                {
-                  "attributes": {
-                    "code": "no-barganing",
-                    "discount_percentage": 0,
-                    "expiration_date": "2025-01-31"
-                  }
-                },
-                {
-                  "attributes": {
-                    "code": "rajeshDai",
-                    "discount_percentage": 100,
-                    "expiration_date": "2039-12-31"
-                  }
-                }
-              ]
             },
             "categories": {
               "data": [
@@ -159,17 +135,6 @@ const productsList = {
             "slug": "rajesh-dai",
             "videos": {
               "data": []
-            },
-            "promo_codes": {
-              "data": [
-                {
-                  "attributes": {
-                    "code": "rajeshDai",
-                    "discount_percentage": 100,
-                    "expiration_date": "2039-12-31"
-                  }
-                }
-              ]
             },
             "categories": {
               "data": [
@@ -333,7 +298,7 @@ export default function Pedals() {
                             (productsList.data.pedals.data.length > 0) ? 
                             (
                               productsList.data.pedals.data.map((data) => (
-                                <a href="/product" className="goods__item-link">
+                                <a href={`/product/${data.attributes.slug}`} className="goods__item-link">
                                     <div className="goods__item">
                                         <img src={`${BACKEND_URI}${data.attributes.image.data.attributes.url}`} alt="" className="goods__img" />
                                         <h3 className="goods__item-title">{}</h3>
