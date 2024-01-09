@@ -1,6 +1,7 @@
 'use client'
 
-import Script from "next/script";
+import Video from 'next-video';
+import myVideo from "../../../videos/video-one.mp4"
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
@@ -11,10 +12,10 @@ import Carousel  from 'reactjs-nextjs-carousel';
 import { useEffect, useState } from "react";
 import { addToBasket } from "@/verdor/basket/basket";
 
-export default function Page({params}) {
+export default function Page({params}:  {params: any}) {
   const [orderQuantity, setOrderQuantity] = useState(1);
 
-  const [pedalData, setPedalData] = useState(null);
+  const [pedalData, setPedalData] = useState<any>();
   const [isError, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
 
@@ -28,22 +29,22 @@ export default function Page({params}) {
 
   let mainImage;
   let additionalImages;
-  let slides = [];
+  let slides: any = [];
 
   // Extract image URL from 'image' attribute
   if (pedalData){
     // Extract image URL from 'image' attribute
-  mainImage = `${BACKEND_URI}${pedalData?.data?.pedals?.data?.[0]?.attributes?.image?.data?.attributes?.url}`;
+    mainImage = `${BACKEND_URI}${pedalData?.data?.pedals?.data?.[0]?.attributes?.image?.data?.attributes?.url}`;
 
-  // Extract image URLs from 'additional_images' attribute
-  const additionalImagesData = pedalData?.data?.pedals?.data?.[0]?.attributes?.additional_images?.data;
+    // Extract image URLs from 'additional_images' attribute
+    const additionalImagesData = pedalData?.data?.pedals?.data?.[0]?.attributes?.additional_images?.data;
 
-  additionalImages = Array.isArray(additionalImagesData) 
-  ? additionalImagesData.map(image => `${BACKEND_URI}${image?.attributes?.url}`)
-  : [];
+    additionalImages = Array.isArray(additionalImagesData) 
+    ? additionalImagesData.map(image => `${BACKEND_URI}${image?.attributes?.url}`)
+    : [];
 
-  // Combine the main image URL and additional image URLs into a new array
-  slides = [mainImage, ...additionalImages];
+    // Combine the main image URL and additional image URLs into a new array
+    slides = [mainImage, ...additionalImages];
 }
 
   if (isLoading) return <>Loading...</>
@@ -127,7 +128,7 @@ export default function Page({params}) {
                       <button 
                       type="button"
                       onClick={() => {
-                        if (orderQuantity > 0) {setOrderQuantity(prev => prev-1)}
+                        if (orderQuantity > 1) {setOrderQuantity(prev => prev-1)}
                       }}>-</button>
 
                       <input type="text" id="count" value={orderQuantity} name="sum" />
@@ -202,7 +203,7 @@ export default function Page({params}) {
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-one.webp" alt="" />
+                <Video src={myVideo} />
               </div>
               <div
                 // onClick={() => openVideo('videos/video-one.mp4')}
@@ -235,6 +236,7 @@ export default function Page({params}) {
                 <img src="images/video-six.webp" alt="" />
               </div>
             </section>
+
             <div id="video-modal" className="video-window-modal">
               {/* <span () => lassName="close" onClick={closeVideo()">&times;</span} */}
               <video id="modal-video" controls></video>
