@@ -6,20 +6,20 @@ import "@/app/style.min.css";
 export default function Hamburger() {
   const menu = [
     {
-      title: "Home",
+      title: "Главная",
       link: "/",
     },
     {
-      title: "About",
-      link: "/#why-hyperce",
+      title: "Педали",
+      link: "/pedals",
     },
     {
-      title: "Contact",
-      link: "/#contact",
+      title: "Контакты",
+      link: "/contacts",
     },
     {
-      title: "FAQs",
-      link: "/#faq",
+      title: "Корзина",
+      link: "/basket",
     },
   ];
   const [menuOpen, setMenuOpen] = useState(false);

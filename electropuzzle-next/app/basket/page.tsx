@@ -8,67 +8,6 @@ export default function BasketPage() {
     <>
       <Navbar />
 
-      <nav id="burger-menu" className="burger-nav">
-        <div className="burger-nav__block">
-          <a tabIndex={-1} href="index.html" className="logo burger-nav__logo">
-            <img
-              src="images/logo-black.svg"
-              alt="ElectroPuzzle"
-              className="logo__img burger-nav__logo-img"
-            />
-          </a>
-          <button
-            tabIndex={-1}
-            id="burger-close"
-            className="burger-nav__closes"
-          >
-            <img
-              src="images/cancel.svg"
-              alt=""
-              className="burger-nav__closes-icon"
-            />
-          </button>
-          <ul className="burger-nav__list">
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="index.html"
-                className="burger-nav__item-link"
-              >
-                Главная
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="pedals.html"
-                className="burger-nav__item-link"
-              >
-                Педали
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="contacts.html"
-                className="burger-nav__item-link"
-              >
-                Контакты
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="basket.html"
-                className="burger-nav__item-link"
-              >
-                Корзина
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
       <div className="wrapper">
         <main className="main main-basket">
           <div className="container basket-container">
