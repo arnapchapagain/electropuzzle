@@ -23,67 +23,6 @@ export default function PedalsPage() {
     <>
       <Navbar />
 
-      <nav id="burger-menu" className="burger-nav">
-        <div className="burger-nav__block">
-          <a tabIndex={-1} href="index.html" className="logo burger-nav__logo">
-            <img
-              src="images/logo-black.svg"
-              alt="ElectroPuzzle"
-              className="logo__img burger-nav__logo-img"
-            />
-          </a>
-          <button
-            tabIndex={-1}
-            id="burger-close"
-            className="burger-nav__closes"
-          >
-            <img
-              src="images/cancel.svg"
-              alt=""
-              className="burger-nav__closes-icon"
-            />
-          </button>
-          <ul className="burger-nav__list">
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="index.html"
-                className="burger-nav__item-link"
-              >
-                Главная
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="pedals.html"
-                className="burger-nav__item-link"
-              >
-                Педали
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="contacts.html"
-                className="burger-nav__item-link"
-              >
-                Контакты
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="basket.html"
-                className="burger-nav__item-link"
-              >
-                Корзина
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
       <section
         className="hero-pedals"
         style={{
@@ -100,57 +39,6 @@ export default function PedalsPage() {
           </p>
         </div>
       </section>
-
-      <div id="menu-filters" className="menu-filters">
-        <form id="menu-form-filters" action="" className="menu-filters__form">
-          <label className="menu-filters__item-btn">
-            <input type="checkbox" checked />
-            <span>Все</span>
-          </label>
-
-          <label className="menu-filters__item-btn">
-            <input type="checkbox" />
-            <span>Овердрайвы</span>
-          </label>
-
-          <label className="menu-filters__item-btn">
-            <input type="checkbox" />
-            <span>Дисторшены</span>
-          </label>
-
-          <label className="menu-filters__item-btn">
-            <input type="checkbox" />
-            <span>Фузы</span>
-          </label>
-
-          <label className="menu-filters__item-btn">
-            <input type="checkbox" />
-            <span>Компрессоры</span>
-          </label>
-
-          <label className="menu-filters__item-btn">
-            <input type="checkbox" />
-            <span>Модуляция и Дилеи</span>
-          </label>
-
-          <label className="menu-filters__item-btn">
-            <input type="checkbox" />
-            <span>Фильтрация и EQ</span>
-          </label>
-
-          <label className="menu-filters__item-btn">
-            <input type="checkbox" />
-            <span>Бустеры</span>
-          </label>
-          <button
-            id="menu-form-btn"
-            type="submit"
-            className="menu-filters__btn"
-          >
-            Применить
-          </button>
-        </form>
-      </div>
 
       <div className="wrapper">
         <main className="main main-pedals">
@@ -171,7 +59,7 @@ export default function PedalsPage() {
               </aside>
 
               {/* product list */}
-              <section className="goods content__goods">
+              <section className="goods content__goods px-10">
                 {filteredPedals.map((pedal: any, index: number) => (
                   <>
                     <a key={index} href="/product" className="goods__item-link">
@@ -200,19 +88,6 @@ export default function PedalsPage() {
           </div>
         </main>
         <Footer />
-      </div>
-      <div className="bg-white text-black">
-        <CategoryFilter
-          categories={categoryData.data.categories.data}
-          onFilterChange={handleFilterChange}
-          filteredCategories={filteredCategories}
-        />
-        <h2>Filtered Pedals</h2>
-        <ul>
-          {filteredPedals.map((pedal: any) => (
-            <li key={pedal.attributes.name}>{pedal.attributes.name}</li>
-          ))}
-        </ul>
       </div>
     </>
   );

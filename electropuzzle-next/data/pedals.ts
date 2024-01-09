@@ -1,16 +1,4 @@
-export const categoryData: {
-    data: {
-        categories: {
-            data: {
-                attributes: {
-                    type: string;
-                    value: string;
-                    description: string | null;
-                };
-            }[];
-        };
-    };
-} = {
+export const categoryData = {
     data: {
         categories: {
             data: [
@@ -233,7 +221,7 @@ export const pedalsProductList = {
                         "characteristics": {
                             "feature": "features lekhdai gayo bhaney ta computer ko memory sakki jala."
                         },
-                        "slug": "rajesh-dai",
+                        "slug": "morning-coffee",
                         "videos": {
                             "data": []
                         },
@@ -271,4 +259,9 @@ export const pedalsProductList = {
             ]
         }
     }
+}
+
+export function getProductBySlug(slug: string) {
+    const product = pedalsProductList.data.pedals.data.find((pedal: any) => pedal.attributes.slug === slug);
+    return product;
 }
