@@ -1,6 +1,6 @@
 import Hamburger from "./Hamburger";
 
-export default function Navbar({ data }) {
+export default function Navbar() {
   return (
     <>
       <header className="header" style={{zIndex: 9999}}>
