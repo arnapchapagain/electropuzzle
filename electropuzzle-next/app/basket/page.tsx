@@ -5,14 +5,72 @@ import Navbar from "../components/Navbar/Navbar";
 import { deleteFromBasket, getBasket } from "@/vendor/basket/basket";
 import { useEffect, useState } from "react";
 import { getProductBySlug } from "../api/pedals/getPedalBySlug";
+import { validatePromoCode } from "../api/pedals/checkPromoCode";
 import Footer from "../components/Footer/Footer";
+import { shippingCosts } from "../api/shippingCost/getShippingCost";
 
 export default function BasketPage() {
   const [basket, setBasket] = useState<any>(getBasket());
+  const [promoCode, setPromoCode] = useState<string>("");
+  const [shipToPlace, setShipToPlace] = useState<string>("");
+  const [shipOptions, setShipOptions] = useState<any>([]);
+  const [shipCosts, setShipCosts] = useState<any>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  function reloadBasket() {
-    setBasket(getBasket());
+  async function iterateBasket(e: any) {
+    e.preventDefault();
+    let tempBasket = [...basket];
+
+    await Promise.all(
+      tempBasket.map(async (product: any) => {
+        const ourProduct = await getProductBySlug(product.productSlug);
+        if (ourProduct) {
+          product.total = ourProduct?.attributes?.price * product.quantity;
+        }
+
+        const res = await validatePromoCode({ promoCode, pedalId: product.id });
+        if (res?.data) {
+          const discountPercentage = res.data.attributes.discount_percentage;
+          const priceBeforeDiscount = product.total || 0;
+          product.total =
+            priceBeforeDiscount -
+            (priceBeforeDiscount * discountPercentage) / 100;
+        }
+      })
+    );
+
+    setBasket(tempBasket);
   }
+
+  function getShippingOptions() {
+    shippingCosts().then((res: any) => {
+      const locations = res.data.shippingCosts.data.map(
+        (item: any) => item.attributes.location
+      );
+      setShipOptions(locations);
+    });
+  }
+
+  function getShippingCost() {
+    shippingCosts().then((res: any) => {
+      const cost = res.data.shippingCosts.data.find(
+        (item: any) => item.attributes.location === shipToPlace
+      )?.attributes.cost;
+
+      if (cost) {
+        setShipCosts(cost);
+      } else {
+      }
+    });
+  }
+
+  useEffect(() => {
+    getShippingOptions();
+  }, [basket]);
+
+  useEffect(() => {
+    getShippingCost();
+  }, [shipToPlace]);
 
   return (
     <>
@@ -31,7 +89,6 @@ export default function BasketPage() {
                     ) => (
                       <div key={index}>
                         <EachBasketProduct
-                          reloadBasket={reloadBasket}
                           quantity={product.quantity}
                           productSlug={product.productSlug}
                         />
@@ -206,12 +263,15 @@ export default function BasketPage() {
                     <input
                       name="promo"
                       type="text"
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value)}
                       placeholder="Ввести промкод"
                       className="basket-pay__input-promo"
                     />
                     <button
                       className="basket-pay__btn-promo btn-green"
                       type="submit"
+                      onClick={iterateBasket}
                     >
                       Применить
                     </button>
@@ -222,11 +282,18 @@ export default function BasketPage() {
                     <legend className="basket-pay__form-title">
                       Отгрузочные реквизиты
                     </legend>
-                    <select className="py-4 px-4 pe-9 block w-full border-gray-200 rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
-                      <option selected>Select shipping address</option>
-                      <option>Nepal</option>
-                      <option>Kathmandu</option>
-                      <option>Russia</option>
+                    <select
+                      required
+                      value={shipToPlace}
+                      onChange={(e) => setShipToPlace(e.target.value)}
+                      className="py-4 px-4 pe-9 block w-full border-gray-200 rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                    >
+                      <option value="" disabled selected>
+                        Select your option
+                      </option>
+                      {shipOptions.map((option: any, index: number) => (
+                        <option>{option}</option>
+                      ))}
                     </select>
                     {/* <div className="custom-radio">
                       <label>
@@ -251,14 +318,16 @@ export default function BasketPage() {
                 <div>
                   {basket.map(
                     (
-                      product: { productSlug: string; quantity: number },
+                      product: {
+                        productSlug: string;
+                        quantity: number;
+                        total: number;
+                        attributes?: { name: string };
+                      },
                       index: number
                     ) => (
                       <div key={index}>
-                        <BasketProductPrices
-                          quantity={product.quantity}
-                          productSlug={product.productSlug}
-                        />
+                        <BasketProductPrices product={product} />
                       </div>
                     )
                   )}
@@ -266,7 +335,12 @@ export default function BasketPage() {
                   {/* Shipping Cost */}
                   <div className="basket-pay__info">
                     <p className="basket-pay__text">Shipping Cost</p>
-                    <p className="basket-pay__price">250 ₽</p>
+                    <p className="basket-pay__price">{shipCosts} ₽</p>
+                  </div>
+                  <hr />
+                  <div className="basket-pay__info">
+                    <p className="basket-pay__text">Final Amount</p>
+                    <p className="basket-pay__price">{totalPrice} ₽</p>
                   </div>
                 </div>
 
@@ -306,11 +380,9 @@ type ProductType = {
 function EachBasketProduct({
   productSlug,
   quantity,
-  reloadBasket,
 }: {
   productSlug: string;
   quantity: number;
-  reloadBasket: any;
 }) {
   const [product, setProduct] = useState<ProductType | null>(null);
 
@@ -358,7 +430,6 @@ function EachBasketProduct({
           <img
             onClick={() => {
               deleteFromBasket({ productSlug: productSlug, quantity: 1 });
-              reloadBasket();
             }}
             src="images/trash-icon.svg"
             alt=""
@@ -373,17 +444,26 @@ function EachBasketProduct({
   );
 }
 
-function BasketProductPrices({ productSlug, quantity }: { productSlug: string; quantity: number }) {
-  const [product, setProduct] = useState<ProductType | null>(null);
+function BasketProductPrices({
+  product,
+}: {
+  product: {
+    productSlug: string;
+    quantity: number;
+    total: number;
+    attributes?: { name: string };
+  };
+}) {
+  const [hamroProduct, setHamroProduct] = useState<ProductType | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const fetchedProduct = await getProductBySlug(productSlug);
-      setProduct(fetchedProduct);
+      const fetchedProduct = await getProductBySlug(product.productSlug);
+      setHamroProduct(fetchedProduct);
     };
 
     fetchProduct();
-  }, [productSlug]);
+  }, [setHamroProduct]);
 
   if (!product) {
     return null;
@@ -391,8 +471,15 @@ function BasketProductPrices({ productSlug, quantity }: { productSlug: string; q
 
   return (
     <div className="basket-pay__info">
-      <p className="basket-pay__text">{product.attributes.name}</p>
-      <p className="basket-pay__price">{product.attributes.price * quantity } ₽</p>
+      <p className="basket-pay__text">{hamroProduct?.attributes.name}</p>
+      <p className="basket-pay__price">
+        {Math.round(
+          product.total
+            ? product.total
+            : product.quantity * hamroProduct?.attributes.price!
+        )}
+        ₽
+      </p>
     </div>
   );
 }
