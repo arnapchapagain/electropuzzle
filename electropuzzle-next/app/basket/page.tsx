@@ -35,12 +35,31 @@ export default function BasketPage() {
           product.total =
             priceBeforeDiscount -
             (priceBeforeDiscount * discountPercentage) / 100;
+
+          setTotalPrice((prev) => {
+            return (prev += product.total);
+          });
         }
       })
     );
 
     setBasket(tempBasket);
+    console.log("yataa", totalPrice);
   }
+
+  async function calculateTotalPrice(
+    basket: { productSlug: string; quantity: number }[]
+  ) {
+    let totalPrice = 0;
+
+    for (const item of basket) {
+      const product = await getProductBySlug(item.productSlug);
+      totalPrice += product.attributes.price * item.quantity;
+    }
+
+    setTotalPrice(totalPrice)
+  }
+
 
   function getShippingOptions() {
     shippingCosts().then((res: any) => {
@@ -66,10 +85,12 @@ export default function BasketPage() {
 
   useEffect(() => {
     getShippingOptions();
+    console.log(basket);
   }, [basket]);
 
   useEffect(() => {
     getShippingCost();
+    calculateTotalPrice(basket)
   }, [shipToPlace]);
 
   return (
@@ -340,7 +361,9 @@ export default function BasketPage() {
                   <hr />
                   <div className="basket-pay__info">
                     <p className="basket-pay__text">Final Amount</p>
-                    <p className="basket-pay__price">{totalPrice} ₽</p>
+                    <p className="basket-pay__price">
+                      {totalPrice + shipCosts} ₽
+                    </p>
                   </div>
                 </div>
 
