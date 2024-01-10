@@ -243,9 +243,13 @@ export default function BasketPage() {
                 </form>
                 <div>
                   {basket.map(
-                    (product: { productSlug: string }, index: number) => (
+                    (
+                      product: { productSlug: string; quantity: number },
+                      index: number
+                    ) => (
                       <div key={index}>
                         <BasketProductPrices
+                          quantity={product.quantity}
                           productSlug={product.productSlug}
                         />
                       </div>
@@ -503,10 +507,13 @@ function EachBasketProduct({
           </p>
         </div>
         <div className="basket-goods__info">
-          <p className="text-xl">{product?.attributes.price} ₽</p>
+          <p className="text-xl">{product?.attributes.price * quantity} ₽</p>
           <p className="text-xl">Количество: {quantity} шт</p>
         </div>
-        <button id="basket-goods-btn" className="basket-goods__btn hover:scale-[105%]">
+        <button
+          id="basket-goods-btn"
+          className="basket-goods__btn hover:scale-[105%]"
+        >
           <img
             onClick={() => {
               deleteFromBasket({ productSlug: productSlug, quantity: 1 });
@@ -525,7 +532,7 @@ function EachBasketProduct({
   );
 }
 
-function BasketProductPrices({ productSlug }: { productSlug: string }) {
+function BasketProductPrices({ productSlug, quantity }: { productSlug: string; quantity: number }) {
   const [product, setProduct] = useState<ProductType | null>(null);
 
   useEffect(() => {
@@ -544,7 +551,7 @@ function BasketProductPrices({ productSlug }: { productSlug: string }) {
   return (
     <div className="basket-pay__info">
       <p className="basket-pay__text">{product.attributes.name}</p>
-      <p className="basket-pay__price">{product.attributes.price} ₽</p>
+      <p className="basket-pay__price">{product.attributes.price * quantity } ₽</p>
     </div>
   );
 }
