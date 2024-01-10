@@ -3,7 +3,7 @@ import Hamburger from "./Hamburger";
 export default function Navbar() {
   return (
     <>
-      <header className="header" style={{zIndex: 9999}}>
+      <header className="header bg-black bg-opacity-30" style={{zIndex: 9999}}>
         <div className="container header__container hidden lg:block">
           <a href="/" className="logo header__logo">
             <img
