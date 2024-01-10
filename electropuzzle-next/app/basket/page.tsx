@@ -4,10 +4,15 @@ import Script from "next/script";
 import Navbar from "../components/Navbar/Navbar";
 import { deleteFromBasket, getBasket } from "@/verdor/basket/basket";
 import { getProductBySlug } from "@/data/pedals";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function BasketPage() {
   const [basket, setBasket] = useState<any>(getBasket());
+
+  function reloadBasket() {
+    setBasket(getBasket());
+  }
+
   return (
     <>
       <Navbar />
@@ -25,6 +30,7 @@ export default function BasketPage() {
                     ) => (
                       <div key={index}>
                         <EachBasketProduct
+                          reloadBasket={reloadBasket}
                           quantity={product.quantity}
                           productSlug={product.productSlug}
                         />
@@ -446,9 +452,11 @@ export default function BasketPage() {
 function EachBasketProduct({
   productSlug,
   quantity,
+  reloadBasket
 }: {
   productSlug: string;
   quantity: number;
+  reloadBasket: any;
 }) {
   const product = getProductBySlug(productSlug);
 
@@ -457,7 +465,9 @@ function EachBasketProduct({
       {/* <h3 className="basket-content__title"></h3> */}
       <div id="basketItem1" className="basket-goods__item basket-item">
         <img
-          src="images/basket-goods.webp"
+          src={
+            getProductBySlug(productSlug)?.attributes.image.data.attributes.url
+          }
           alt=""
           className="basket-goods__img"
         />
@@ -475,6 +485,7 @@ function EachBasketProduct({
           <img
             onClick={() => {
               deleteFromBasket({ productSlug: productSlug, quantity: 1 });
+              reloadBasket();
             }}
             src="images/trash-icon.svg"
             alt=""

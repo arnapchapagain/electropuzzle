@@ -85,7 +85,7 @@ export const pedalsProductList = {
                             "data": {
                                 "attributes": {
                                     "name": "POV: Modi Ji",
-                                    "url": "/uploads/3xov_Y1edu_Dqa_Dbr_P_Kq2l_Bt_QF_Xd_Raa34xd_S7_GX_Wto_JHE_e9183013cd.webp",
+                                    "url": "http://localhost:1337/uploads/3xov_Y1edu_Dqa_Dbr_P_Kq2l_Bt_QF_Xd_Raa34xd_S7_GX_Wto_JHE_e9183013cd.webp",
                                     "alternativeText": "Only Modi Ji. No Alt Text"
                                 }
                             }
