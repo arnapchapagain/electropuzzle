@@ -1,11 +1,29 @@
 "use client";
-import { categoryData, pedalsProductList } from "@/data/pedals";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
+import { getAllPedals } from "../api/pedals/getAllPedals";
+import { getAllCategories } from "../api/pedals/getAllCategories";
 
 export default function PedalsPage() {
   const [filteredCategories, setFilteredCategories] = useState([]);
+  const [pedalsProductList, setPedalsProductList] = useState<any>([]);
+  const [categoryData, setCategoryData] = useState<any>([]);
+
+  useEffect(() => {
+    reloadPedals();
+    reloadCategories();
+  }, []);
+
+  async function reloadPedals() {
+    const pedals = await getAllPedals();
+    setPedalsProductList(pedals);
+  }
+
+  async function reloadCategories() {
+    const categories = await getAllCategories();
+    setCategoryData(categories);
+  }
 
   const handleFilterChange = (selectedCategories: any) => {
     setFilteredCategories(selectedCategories);
