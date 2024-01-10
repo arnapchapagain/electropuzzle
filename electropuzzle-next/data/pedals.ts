@@ -1,3 +1,5 @@
+import { getAllPedals } from "@/app/api/pedals/getAllPedals";
+
 export const categoryData = {
     data: {
         categories: {
@@ -160,7 +162,7 @@ export const pedalsProductList = {
                 },
                 {
                     "attributes": {
-                        "name": "Rajesh Dai",
+                        "name": "Rajesh muji",
                         "based_on": "rajesh dai",
                         "price": 1000000,
                         "stock": 10000000,
@@ -262,6 +264,8 @@ export const pedalsProductList = {
 }
 
 export function getProductBySlug(slug: string) {
+    const allPedals = getAllPedals();
+
     const product = pedalsProductList.data.pedals.data.find((pedal: any) => pedal.attributes.slug === slug);
     return product;
 }

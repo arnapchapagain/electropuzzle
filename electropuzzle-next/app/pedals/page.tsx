@@ -5,8 +5,8 @@ import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 
 import BACKEND_URI from "../data.js";
-import { getAllPedals } from "./api/getAllPedals";
-import { getAllCategories } from "./api/getAllCategories";
+import { getAllPedals } from "../api/pedals/getAllPedals";
+import { getAllCategories } from "../api/pedals/getAllCategories";
 
 export default function Pedals() {
   const [filteredCategories, setFilteredCategories] = useState<any>([]);
@@ -129,65 +129,71 @@ const CategoryFilter = ({
     onFilterChange(updatedCategories);
   };
 
-  const groupedCategories: [] = categories?.reduce((acc: any, category: any) => {
-    const type = category.attributes.type || "Other";
-    acc[type] = acc[type] || [];
-    acc[type].push(category);
-    return acc;
-  }, {});
+  const groupedCategories: [] = categories?.reduce(
+    (acc: any, category: any) => {
+      const type = category.attributes.type || "Other";
+      acc[type] = acc[type] || [];
+      acc[type].push(category);
+      return acc;
+    },
+    {}
+  );
 
   return (
     <div>
-      {groupedCategories && Object.entries(groupedCategories)?.map(([type, typeCategories]: any) => (
-        <div key={type} className="filters__item">
-          <h3 className="filters__item-title">
-            {type}
-            <svg
-              className="filters__item-icon"
-              width="21"
-              height="3"
-              viewBox="0 0 21 3"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <line
-                x1="0.916992"
-                y1="1.5"
-                x2="20.917"
-                y2="1.5"
-                stroke="black"
-                stroke-width="2"
-              />
-            </svg>
-          </h3>
-          <form action="" className="filters__form">
-            {typeCategories.map((category: any) => (
-              <label className="filters__item-btn">
-                <input
-                  type="checkbox"
-                  id={category.attributes.value}
-                  checked={selectedCategories.includes(
-                    category.attributes.value
-                  )}
-                  onChange={() =>
-                    handleCategoryChange(category.attributes.value)
-                  }
-                />
-                <span
-                  className={`text-2xl flex gap-5 ${
-                    filteredCategories.includes(category.attributes.value)
-                      ? "font-bold"
-                      : ""
-                  }`}
+      {groupedCategories &&
+        Object.entries(groupedCategories)?.map(
+          ([type, typeCategories]: any) => (
+            <div key={type} className="filters__item">
+              <h3 className="filters__item-title">
+                {type}
+                <svg
+                  className="filters__item-icon"
+                  width="21"
+                  height="3"
+                  viewBox="0 0 21 3"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  {category.attributes.value}
-                  <span className="">115</span>
-                </span>
-              </label>
-            ))}
-          </form>
-        </div>
-      ))}
+                  <line
+                    x1="0.916992"
+                    y1="1.5"
+                    x2="20.917"
+                    y2="1.5"
+                    stroke="black"
+                    stroke-width="2"
+                  />
+                </svg>
+              </h3>
+              <form action="" className="filters__form">
+                {typeCategories.map((category: any) => (
+                  <label className="filters__item-btn">
+                    <input
+                      type="checkbox"
+                      id={category.attributes.value}
+                      checked={selectedCategories.includes(
+                        category.attributes.value
+                      )}
+                      onChange={() =>
+                        handleCategoryChange(category.attributes.value)
+                      }
+                    />
+                    <span
+                      className={`text-2xl flex gap-5 ${
+                        filteredCategories.includes(category.attributes.value)
+                          ? "font-bold"
+                          : ""
+                      }`}
+                    >
+                      {category.attributes.value}
+                      <span className="">115</span>
+                    </span>
+                  </label>
+                ))}
+              </form>
+            </div>
+          )
+        )}
     </div>
   );
 };

@@ -3,8 +3,8 @@
 import Script from "next/script";
 import Navbar from "../components/Navbar/Navbar";
 import { deleteFromBasket, getBasket } from "@/vendor/basket/basket";
-import { getProductBySlug } from "@/data/pedals";
 import { useEffect, useState } from "react";
+import { getProductBySlug } from "../api/pedals/getPedalBySlug";
 
 export default function BasketPage() {
   const [basket, setBasket] = useState<any>(getBasket());
@@ -22,7 +22,7 @@ export default function BasketPage() {
           <div className="container basket-container">
             <div className="basket-content">
               <div className="basket-content__block">
-                <section className="basket-goods basket-content__goods">
+                <section className="basket-goods flex flex-col gap-5 basket-content__goods">
                   {basket.map(
                     (
                       product: { productSlug: string; quantity: number },
@@ -39,9 +39,7 @@ export default function BasketPage() {
                   )}
                 </section>
                 <section className="basket-info basket-content__info">
-                  <h3 className="basket-content__title">
-                    Информация о доставке
-                  </h3>
+                  <h3 className="basket-content__title"></h3>
 
                   <form id="form-info" action="" className="basket-info__form">
                     <fieldset className="basket-info__main">
@@ -449,6 +447,20 @@ export default function BasketPage() {
   );
 }
 
+type ProductType = {
+  attributes: {
+    image: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
+    name: string;
+    price: number;
+  };
+};
+
 function EachBasketProduct({
   productSlug,
   quantity,
@@ -458,15 +470,28 @@ function EachBasketProduct({
   quantity: number;
   reloadBasket: any;
 }) {
-  const product = getProductBySlug(productSlug);
+  const [product, setProduct] = useState<ProductType | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const fetchedProduct = await getProductBySlug(productSlug);
+      setProduct(fetchedProduct);
+    };
+
+    fetchProduct();
+  }, [productSlug]);
+
+  if (!product) {
+    return null;
+  }
 
   return (
     <div>
-      {/* <h3 className="basket-content__title"></h3> */}
       <div id="basketItem1" className="basket-goods__item basket-item">
         <img
           src={
-            getProductBySlug(productSlug)?.attributes.image.data.attributes.url
+            "http://localhost:1337" +
+            product?.attributes.image.data.attributes.url
           }
           alt=""
           className="basket-goods__img"
@@ -475,7 +500,7 @@ function EachBasketProduct({
           <h3 className="basket-goods__item-title">
             {product?.attributes.name}
           </h3>
-          <p className="basket-goods__ver">Вариант: Стандарт</p>
+          <p className="basket-goods__ver">hi</p>
         </div>
         <div className="basket-goods__info">
           <p className="basket-goods__price">{product?.attributes.price} ₽</p>
