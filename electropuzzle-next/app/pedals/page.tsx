@@ -1,22 +1,40 @@
 "use client";
 
-import { useState } from "react";
-import { categoryData, pedalsProductList } from "@/data/pedals";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 
 import BACKEND_URI from "../data.js";
+import { getAllPedals } from "./api/getAllPedals";
+import { getAllCategories } from "./api/getAllCategories";
 
 export default function Pedals() {
-  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState<any>([]);
+  const [pedalsProductList, setPedalsProductList] = useState<any>([]);
+  const [categoryData, setCategoryData] = useState<any>([]);
+
+  useEffect(() => {
+    reloadPedals();
+    reloadCategories();
+  }, []);
+
+  async function reloadPedals() {
+    const pedals = await getAllPedals();
+    setPedalsProductList(pedals);
+  }
+
+  async function reloadCategories() {
+    const categories = await getAllCategories();
+    setCategoryData(categories);
+  }
 
   const handleFilterChange = (selectedCategories: any) => {
     setFilteredCategories(selectedCategories);
   };
-  const filteredPedals = pedalsProductList.data.pedals.data.filter(
+  const filteredPedals = pedalsProductList?.data?.pedals?.data?.filter(
     (pedal: any) =>
-      filteredCategories.every((category) =>
-        pedal.attributes.categories.data.some(
+      filteredCategories.every((category: any) =>
+        pedal?.attributes?.categories?.data?.some(
           (pedalCategory: any) => pedalCategory.attributes.value === category
         )
       )
@@ -51,7 +69,7 @@ export default function Pedals() {
             >
               <aside className="filters content__filters" style={{ flex: 1 }}>
                 <CategoryFilter
-                  categories={categoryData.data.categories.data}
+                  categories={categoryData?.data?.categories?.data}
                   onFilterChange={handleFilterChange}
                   filteredCategories={filteredCategories}
                 />
@@ -59,7 +77,7 @@ export default function Pedals() {
 
               {/* product list */}
               <section className="goods content__goods" style={{ flex: 2 }}>
-                {filteredPedals?.map((data) => (
+                {filteredPedals?.map((data: any) => (
                   <a
                     href={`/product/${data.attributes.slug}`}
                     className="goods__item-link"
@@ -111,7 +129,7 @@ const CategoryFilter = ({
     onFilterChange(updatedCategories);
   };
 
-  const groupedCategories = categories.reduce((acc: any, category: any) => {
+  const groupedCategories: [] = categories?.reduce((acc: any, category: any) => {
     const type = category.attributes.type || "Other";
     acc[type] = acc[type] || [];
     acc[type].push(category);
@@ -120,7 +138,7 @@ const CategoryFilter = ({
 
   return (
     <div>
-      {Object.entries(groupedCategories).map(([type, typeCategories]: any) => (
+      {groupedCategories && Object.entries(groupedCategories)?.map(([type, typeCategories]: any) => (
         <div key={type} className="filters__item">
           <h3 className="filters__item-title">
             {type}

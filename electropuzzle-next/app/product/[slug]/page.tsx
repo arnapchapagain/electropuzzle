@@ -10,7 +10,7 @@ import fetchProductData from "./fetchProductData.js"
 
 import Carousel  from 'reactjs-nextjs-carousel';
 import { useEffect, useState } from "react";
-import { addToBasket } from "@/verdor/basket/basket";
+import { addToBasket } from "@/vendor/basket/basket";
 
 export default function Page({params}:  {params: any}) {
   const [orderQuantity, setOrderQuantity] = useState(1);
