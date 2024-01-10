@@ -205,32 +205,12 @@ export default function Page({params}:  {params: any}) {
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <Video src={BACKEND_URI + mainProductData?.videos?.data[0]?.attributes?.url} />
-              </div>
-
-              <div
-                // onClick={() => openVideo('videos/video-one.mp4')}
-                className="product-video__item"
-              >
-                <img src="/images/video-three.webp" alt="" />
-              </div>
-              <div
-                // onClick={() => openVideo('videos/video-one.mp4')}
-                className="product-video__item"
-              >
-                <img src="/images/video-vour.webp" alt="" />
-              </div>
-              <div
-                // onClick={() => openVideo('videos/video-one.mp4')}
-                className="product-video__item"
-              >
-                <img src="/images/video-five.webp" alt="" />
-              </div>
-              <div
-                // onClick={() => openVideo('videos/video-one.mp4')}
-                className="product-video__item"
-              >
-                <img src="/images/video-six.webp" alt="" />
+                {
+                  mainProductData?.videos?.data[0] ? 
+                  (<Video src={BACKEND_URI + mainProductData?.videos?.data[0]?.attributes?.url} />) : 
+                  (<>No videos found for this product</>)
+                }
+                
               </div>
             </section>
 
