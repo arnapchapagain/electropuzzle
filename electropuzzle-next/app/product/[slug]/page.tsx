@@ -136,7 +136,9 @@ export default function Page({params}:  {params: any}) {
                       <button 
                       type="button"
                       onClick={() => {
-                        setOrderQuantity(prev => prev+1)
+                        if ((orderQuantity + 1) < mainProductData.stock){
+                          setOrderQuantity(prev => prev+1)
+                        }
                       }}>+</button>
                     </div>
                   </form>
