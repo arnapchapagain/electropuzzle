@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { deleteFromBasket, getBasket } from "@/vendor/basket/basket";
 import { useEffect, useState } from "react";
 import { getProductBySlug } from "../api/pedals/getPedalBySlug";
+import Footer from "../components/Footer/Footer";
 
 export default function BasketPage() {
   const [basket, setBasket] = useState<any>(getBasket());
@@ -219,9 +220,15 @@ export default function BasketPage() {
                 <form id="form-pay" action="" className="basket-pay__form">
                   <fieldset>
                     <legend className="basket-pay__form-title">
-                      Детали оплаты
+                      Отгрузочные реквизиты
                     </legend>
-                    <div className="custom-radio">
+                    <select className="py-4 px-4 pe-9 block w-full border-gray-200 rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+                      <option selected>Select shipping address</option>
+                      <option>Nepal</option>
+                      <option>Kathmandu</option>
+                      <option>Russia</option>
+                    </select>
+                    {/* <div className="custom-radio">
                       <label>
                         <input checked type="radio" name="radio" />
                         <div className="custom-radio__label">
@@ -238,7 +245,7 @@ export default function BasketPage() {
                           Заказать на сайте
                         </div>
                       </label>
-                    </div>
+                    </div> */}
                   </fieldset>
                 </form>
                 <div>
@@ -255,6 +262,12 @@ export default function BasketPage() {
                       </div>
                     )
                   )}
+
+                  {/* Shipping Cost */}
+                  <div className="basket-pay__info">
+                    <p className="basket-pay__text">Shipping Cost</p>
+                    <p className="basket-pay__price">250 ₽</p>
+                  </div>
                 </div>
 
                 <button
@@ -269,179 +282,7 @@ export default function BasketPage() {
           </div>
         </main>
 
-        <footer className="footer">
-          <div className="container footer__container">
-            <div className="footer__item footer__item_logo">
-              <a href="index.html" className="logo footer__logo">
-                <img
-                  src="images/logo.svg"
-                  alt="ElectroPuzzle"
-                  className="logo__img footer__logo-img"
-                />
-                <span className="logo__text footer__logo-text">
-                  ElectroPuzzle
-                </span>
-              </a>
-              <form id="footer-form" action="" className="footer__form">
-                <div className="footer__email">
-                  <input
-                    name="email"
-                    id="footer-input"
-                    type="email"
-                    className="footer__input"
-                    placeholder="john@example.com"
-                    required
-                  />
-                  <button id="footer-btn" className="footer__btn" type="submit">
-                    <img
-                      className="footer__btn-img"
-                      src="images/email-arrow.svg"
-                      alt=""
-                    />
-                  </button>
-                </div>
-              </form>
-            </div>
-            <div className="footer__item footer__item_pedals">
-              <h2 className="footer__item-title">ПЕДАЛИ</h2>
-              <ul className="footer__list footer__list_pedals">
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Дилеи
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Бустеры
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Овердрайвы
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Дисторшены
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Модуляция
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Фузы
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Компрессоры
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer__item">
-              <h2 className="footer__item-title">СТРАНИЦЫ</h2>
-              <ul className="footer__list footer__list_pages">
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Главная
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Педали
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Контакты
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Новости
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="footer__item footer__item_img-block">
-              <img
-                width="264"
-                height="264"
-                className="footer__item-img"
-                src="images/footer-pedals-img.webp"
-                alt=""
-              />
-            </div>
-          </div>
-          <div className="footer__text">
-            © 2023 ElectroPuzzle. Design by Kiselev Roman.
-          </div>
-        </footer>
-      </div>
-
-      <div className="overlay" id="overlay"></div>
-
-      <div className="popup-container" id="popup1">
-        <div className="blockcentr">
-          <h3 className="popup-pay__title">Оформление заказа</h3>
-          <form action="" className="popup-pay__form">
-            <fieldset>
-              <label htmlFor="popup-pay-fio">
-                <span>ФИО*</span>
-                <input
-                  name="fio"
-                  required
-                  id="inputFio"
-                  type="text"
-                  className="popup-pay__input"
-                />
-              </label>
-              <label htmlFor="popup-pay-tel">
-                <span>Телефон*</span>
-                <input
-                  name="tel"
-                  required
-                  id="inputTel"
-                  type="tel"
-                  className="popup-pay__input"
-                />
-              </label>
-            </fieldset>
-            <button
-              id="submit1"
-              type="submit"
-              className="popup-pay__btn openokno openokno2 btn-green"
-            >
-              Продолжить
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="popup-container" id="popup2">
-        <div className="blockcentr2">
-          <div className="popup-pay__img-block">
-            <img
-              src="images/popup-pay-icon.webp"
-              alt=""
-              className="popup-pay__img"
-            />
-          </div>
-
-          <h3 className="popup-pay__title">Заказ принят</h3>
-          <button
-            id="closePopup2"
-            type="button"
-            className="popup-pay__btn openokno2 btn-green"
-          >
-            Продолжить
-          </button>
-        </div>
+        <Footer />
       </div>
     </>
   );
