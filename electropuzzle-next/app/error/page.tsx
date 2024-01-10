@@ -1,9 +1,11 @@
+import "@/app/style.min.css"
+
 export default function ErrorPage() {
   return (
     <>
       <header className="header">
         <div className="container header__container">
-          <a href="index.html" className="logo header__logo">
+          <a href="/" className="logo header__logo">
             <img
               src="images/logo-black.svg"
               alt="ElectroPuzzle"
@@ -23,7 +25,7 @@ export default function ErrorPage() {
           <div className="page-404__text-block">
             <h1 className="page-404__title">404</h1>
             <p className="page-404__text">Что-то пошло не так</p>
-            <a href="index.html" className="page-404__btn">
+            <a href="/" className="page-404__btn">
               На главную
             </a>
           </div>
