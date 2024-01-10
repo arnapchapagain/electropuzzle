@@ -1,9 +1,30 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Hamburger from "./Hamburger";
+import { getBasket } from "@/vendor/basket/basket";
 
 export default function Navbar() {
+  const [basket, setBasket] = useState<any>(getBasket());
+
+  function reloadBasket() {
+    setBasket(getBasket());
+  }
+
+  useEffect(() => {
+    reloadBasket();
+  }, []);
+
+  const [totalBasketQuantity, setTotalBasketQuantity] = useState(
+    basket.reduce((total: any, item: any) => total + item.quantity, 0)
+  );
+
   return (
     <>
-      <header className="header bg-black bg-opacity-30" style={{zIndex: 9999}}>
+      <header
+        className="header bg-black bg-opacity-30"
+        style={{ zIndex: 9999 }}
+      >
         <div className="container header__container hidden lg:block">
           <a href="/" className="logo header__logo">
             <img
@@ -31,16 +52,23 @@ export default function Navbar() {
                 </a>
               </li>
               <li className="nav__item">
-                <a href="/basket" className="nav__item-link">
+                <a
+                  href="/basket"
+                  className="relative inline-flex justify-center items-center h-[3.8rem] w-[4.5rem] text-sm font-semibold rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm  dark:bg-slate-900 dark:bg-opacity-20 dark:border-gray-800 dark:text-white  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                >
                   <img
                     src="/images/basket-icon.svg"
                     alt=""
                     className="nav__item-icon"
                   />
+                  <span className="absolute top-0 end-0 inline-flex items-center py-2 px-3 rounded-full text-xs font-medium transform -translate-y-1/2 translate-x-1/2 bg-red-500 text-white">
+                    {totalBasketQuantity}
+                  </span>
                 </a>
               </li>
             </ul>
           </nav>
+
           {/* <button tabIndex={-1} id="burger" className="header__menu">
             <svg
               width="59"
