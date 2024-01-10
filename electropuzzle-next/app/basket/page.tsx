@@ -241,22 +241,18 @@ export default function BasketPage() {
                     </div>
                   </fieldset>
                 </form>
-                <div className="basket-pay__info">
-                  <p className="basket-pay__text">Цена товаров</p>
-                  <p className="basket-pay__price">11000.00 ₽</p>
+                <div>
+                  {basket.map(
+                    (product: { productSlug: string }, index: number) => (
+                      <div key={index}>
+                        <BasketProductPrices
+                          productSlug={product.productSlug}
+                        />
+                      </div>
+                    )
+                  )}
                 </div>
-                <div className="basket-pay__info">
-                  <p className="basket-pay__text">Стоимость доставки</p>
-                  <p className="basket-pay__price">500.00 ₽</p>
-                </div>
-                <div className="basket-pay__info">
-                  <p className="basket-pay__text">Скидка по купону</p>
-                  <p className="basket-pay__price">-1500.00 ₽</p>
-                </div>
-                <div className="basket-pay__info">
-                  <p className="basket-pay__text">Итого</p>
-                  <p className="basket-pay__price">10000.00 ₽</p>
-                </div>
+
                 <button
                   id="showPopup"
                   className="btn-green basket-pay__btn-pay"
@@ -458,6 +454,7 @@ type ProductType = {
     };
     name: string;
     price: number;
+    description: string;
   };
 };
 
@@ -487,26 +484,29 @@ function EachBasketProduct({
 
   return (
     <div>
-      <div id="basketItem1" className="basket-goods__item basket-item">
+      <div
+        id="basketItem1"
+        className="basket-goods__item basket-item flex gap-5"
+      >
         <img
           src={
             "http://localhost:1337" +
             product?.attributes.image.data.attributes.url
           }
           alt=""
-          className="basket-goods__img"
+          className="h-40 aspect-square w-40"
         />
-        <div className="basket-goods__name">
-          <h3 className="basket-goods__item-title">
-            {product?.attributes.name}
-          </h3>
-          <p className="basket-goods__ver">hi</p>
+        <div className="w-[100%]">
+          <h3 className="font-bold text-3xl">{product?.attributes.name}</h3>
+          <p className="text-xl line-clamp-3">
+            {product.attributes.description}
+          </p>
         </div>
         <div className="basket-goods__info">
-          <p className="basket-goods__price">{product?.attributes.price} ₽</p>
-          <p className="basket-goods__sum">Количество: {quantity} шт</p>
+          <p className="text-xl">{product?.attributes.price} ₽</p>
+          <p className="text-xl">Количество: {quantity} шт</p>
         </div>
-        <button id="basket-goods-btn" className="basket-goods__btn">
+        <button id="basket-goods-btn" className="basket-goods__btn hover:scale-[105%]">
           <img
             onClick={() => {
               deleteFromBasket({ productSlug: productSlug, quantity: 1 });
@@ -521,6 +521,30 @@ function EachBasketProduct({
       <div id="empty" className="empty">
         Пусто
       </div>
+    </div>
+  );
+}
+
+function BasketProductPrices({ productSlug }: { productSlug: string }) {
+  const [product, setProduct] = useState<ProductType | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const fetchedProduct = await getProductBySlug(productSlug);
+      setProduct(fetchedProduct);
+    };
+
+    fetchProduct();
+  }, [productSlug]);
+
+  if (!product) {
+    return null;
+  }
+
+  return (
+    <div className="basket-pay__info">
+      <p className="basket-pay__text">{product.attributes.name}</p>
+      <p className="basket-pay__price">{product.attributes.price} ₽</p>
     </div>
   );
 }
