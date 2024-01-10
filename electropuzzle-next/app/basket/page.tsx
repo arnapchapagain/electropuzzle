@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import Navbar from "../components/Navbar/Navbar";
-import { deleteFromBasket, getBasket } from "@/verdor/basket/basket";
+import { deleteFromBasket, getBasket } from "@/vendor/basket/basket";
 import { getProductBySlug } from "@/data/pedals";
 import { useEffect, useState } from "react";
 
@@ -452,7 +452,7 @@ export default function BasketPage() {
 function EachBasketProduct({
   productSlug,
   quantity,
-  reloadBasket
+  reloadBasket,
 }: {
   productSlug: string;
   quantity: number;
