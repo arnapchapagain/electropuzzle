@@ -57,9 +57,8 @@ export default function BasketPage() {
       totalPrice += product.attributes.price * item.quantity;
     }
 
-    setTotalPrice(totalPrice)
+    setTotalPrice(totalPrice);
   }
-
 
   function getShippingOptions() {
     shippingCosts().then((res: any) => {
@@ -90,7 +89,7 @@ export default function BasketPage() {
 
   useEffect(() => {
     getShippingCost();
-    calculateTotalPrice(basket)
+    calculateTotalPrice(basket);
   }, [shipToPlace]);
 
   return (
@@ -112,6 +111,7 @@ export default function BasketPage() {
                         <EachBasketProduct
                           quantity={product.quantity}
                           productSlug={product.productSlug}
+                          setBasket={setBasket}
                         />
                       </div>
                     )
@@ -403,9 +403,11 @@ type ProductType = {
 function EachBasketProduct({
   productSlug,
   quantity,
+  setBasket,
 }: {
   productSlug: string;
   quantity: number;
+  setBasket: any;
 }) {
   const [product, setProduct] = useState<ProductType | null>(null);
 
@@ -453,6 +455,7 @@ function EachBasketProduct({
           <img
             onClick={() => {
               deleteFromBasket({ productSlug: productSlug, quantity: 1 });
+              setBasket(getBasket());
             }}
             src="images/trash-icon.svg"
             alt=""

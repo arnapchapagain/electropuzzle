@@ -7,7 +7,7 @@ export default function Home() {
 
       <nav id="burger-menu" className="burger-nav">
         <div className="burger-nav__block">
-          <a tabIndex={-1} href="index.html" className="logo burger-nav__logo">
+          <a tabIndex={-1} href="/" className="logo burger-nav__logo">
             <img
               src="/images/logo-black.svg"
               alt="ElectroPuzzle"
@@ -29,7 +29,7 @@ export default function Home() {
             <li className="burger-nav__item">
               <a
                 tabIndex={-1}
-                href="index.html"
+                href="/"
                 className="burger-nav__item-link"
               >
                 Главная
@@ -38,7 +38,7 @@ export default function Home() {
             <li className="burger-nav__item">
               <a
                 tabIndex={-1}
-                href="pedals.html"
+                href="/pedals"
                 className="burger-nav__item-link"
               >
                 Педали
@@ -47,7 +47,7 @@ export default function Home() {
             <li className="burger-nav__item">
               <a
                 tabIndex={-1}
-                href="contacts.html"
+                href="/contacts"
                 className="burger-nav__item-link"
               >
                 Контакты
@@ -56,7 +56,7 @@ export default function Home() {
             <li className="burger-nav__item">
               <a
                 tabIndex={-1}
-                href="basket.html"
+                href="/basket"
                 className="burger-nav__item-link"
               >
                 Корзина
@@ -153,7 +153,7 @@ export default function Home() {
                 </div>
               </a>
 
-              <a href="404.html" className="projects__item-link">
+              <a href="/error" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
@@ -411,7 +411,7 @@ export default function Home() {
         <footer className="footer">
           <div className="container footer__container">
             <div className="footer__item footer__item_logo">
-              <a href="index.html" className="logo footer__logo">
+              <a href="/" className="logo footer__logo">
                 <img
                   src="/images/logo.svg"
                   alt="ElectroPuzzle"
