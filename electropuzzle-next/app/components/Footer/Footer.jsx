@@ -6,7 +6,7 @@ export default function Footer () {
           <div className="footer__item footer__item_logo">
             <a href="index.html" className="logo footer__logo"
               ><img
-                src="images/logo.svg"
+                src="/images/logo.svg"
                 alt="ElectroPuzzle"
                 className="logo__img footer__logo-img"/><span className="logo__text footer__logo-text">ElectroPuzzle</span></a>
             <form id="footer-form" action="" className="footer__form">
@@ -21,7 +21,7 @@ export default function Footer () {
                 <button id="footer-btn" className="footer__btn" type="submit">
                   <img
                     className="footer__btn-img"
-                    src="images/email-arrow.svg"
+                    src="/images/email-arrow.svg"
                     alt=""
                   />
                 </button>
@@ -77,7 +77,7 @@ export default function Footer () {
               width="264"
               height="264"
               className="footer__item-img"
-              src="images/footer-pedals-img.webp"
+              src="/images/footer-pedals-img.webp"
               alt=""
             />
           </div>

@@ -1,6 +1,7 @@
 'use client'
 
-import Script from "next/script";
+import Video from 'next-video';
+import myVideo from "../../../videos/video-one.mp4"
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
@@ -9,11 +10,12 @@ import fetchProductData from "./fetchProductData.js"
 
 import Carousel  from 'reactjs-nextjs-carousel';
 import { useEffect, useState } from "react";
+import { addToBasket } from "@/verdor/basket/basket";
 
-export default function Page({params}) {
-  console.log(params.slug)
+export default function Page({params}:  {params: any}) {
+  const [orderQuantity, setOrderQuantity] = useState(1);
 
-  const [pedalData, setPedalData] = useState(null);
+  const [pedalData, setPedalData] = useState<any>();
   const [isError, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
 
@@ -27,22 +29,22 @@ export default function Page({params}) {
 
   let mainImage;
   let additionalImages;
-  let slides = [];
+  let slides: any = [];
 
   // Extract image URL from 'image' attribute
   if (pedalData){
     // Extract image URL from 'image' attribute
-  mainImage = `${BACKEND_URI}${pedalData?.data?.pedals?.data?.[0]?.attributes?.image?.data?.attributes?.url}`;
+    mainImage = `${BACKEND_URI}${pedalData?.data?.pedals?.data?.[0]?.attributes?.image?.data?.attributes?.url}`;
 
-  // Extract image URLs from 'additional_images' attribute
-  const additionalImagesData = pedalData?.data?.pedals?.data?.[0]?.attributes?.additional_images?.data;
+    // Extract image URLs from 'additional_images' attribute
+    const additionalImagesData = pedalData?.data?.pedals?.data?.[0]?.attributes?.additional_images?.data;
 
-  additionalImages = Array.isArray(additionalImagesData) 
-  ? additionalImagesData.map(image => `${BACKEND_URI}${image?.attributes?.url}`)
-  : [];
+    additionalImages = Array.isArray(additionalImagesData) 
+    ? additionalImagesData.map(image => `${BACKEND_URI}${image?.attributes?.url}`)
+    : [];
 
-  // Combine the main image URL and additional image URLs into a new array
-  slides = [mainImage, ...additionalImages];
+    // Combine the main image URL and additional image URLs into a new array
+    slides = [mainImage, ...additionalImages];
 }
 
   if (isLoading) return <>Loading...</>
@@ -59,13 +61,13 @@ export default function Page({params}) {
       <div className="burger-nav__block">
         <a tabIndex={-1} href="/" className="logo burger-nav__logo">
           <img
-            src="images/logo-black.svg"
+            src="/images/logo-black.svg"
             alt="ElectroPuzzle"
             className="logo__img burger-nav__logo-img"
           />
         </a>
         <button tabIndex={-1} id="burger-close" className="burger-nav__closes">
-          <img src="images/cancel.svg" alt="" className="burger-nav__closes-icon" />
+          <img src="/images/cancel.svg" alt="" className="burger-nav__closes-icon" />
         </button>
         <ul className="burger-nav__list">
           <li className="burger-nav__item">
@@ -123,9 +125,19 @@ export default function Page({params}) {
                 <div className="product-item__sum">
                   <form id="form-sum" className="product-item__form" action="">
                     <div className="counter">
-                      <button type="button" id="decrease">-</button>
-                      <input type="text" id="count" value="1" name="sum" />
-                      <button type="button" id="increase">+</button>
+                      <button 
+                      type="button"
+                      onClick={() => {
+                        if (orderQuantity > 1) {setOrderQuantity(prev => prev-1)}
+                      }}>-</button>
+
+                      <input type="text" id="count" value={orderQuantity} name="sum" />
+
+                      <button 
+                      type="button"
+                      onClick={() => {
+                        setOrderQuantity(prev => prev+1)
+                      }}>+</button>
                     </div>
                   </form>
 
@@ -138,7 +150,12 @@ export default function Page({params}) {
                   >
                     Купить в один клик
                   </button>
-                  <button className="product-item__btn-basket">
+                  <button className="product-item__btn-basket" onClick={() => {
+                        addToBasket({
+                          productSlug: `${params.slug}`,
+                          quantity: orderQuantity,
+                        });
+                      }}>
                     Добавить в корзину
                   </button>
                 </div>
@@ -186,39 +203,35 @@ export default function Page({params}) {
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-one.webp" alt="" />
+                <Video src={BACKEND_URI + mainProductData?.videos?.data[0]?.attributes?.url} />
+              </div>
+
+              <div
+                // onClick={() => openVideo('videos/video-one.mp4')}
+                className="product-video__item"
+              >
+                <img src="/images/video-three.webp" alt="" />
               </div>
               <div
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-two.webp" alt="" />
+                <img src="/images/video-vour.webp" alt="" />
               </div>
               <div
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-three.webp" alt="" />
+                <img src="/images/video-five.webp" alt="" />
               </div>
               <div
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-vour.webp" alt="" />
-              </div>
-              <div
-                // onClick={() => openVideo('videos/video-one.mp4')}
-                className="product-video__item"
-              >
-                <img src="images/video-five.webp" alt="" />
-              </div>
-              <div
-                // onClick={() => openVideo('videos/video-one.mp4')}
-                className="product-video__item"
-              >
-                <img src="images/video-six.webp" alt="" />
+                <img src="/images/video-six.webp" alt="" />
               </div>
             </section>
+
             <div id="video-modal" className="video-window-modal">
               {/* <span () => lassName="close" onClick={closeVideo()">&times;</span} */}
               <video id="modal-video" controls></video>
@@ -248,7 +261,7 @@ export default function Page({params}) {
         <div className="container">
           <div className="projects__head">
             <img
-              src="images/projects-icon.svg"
+              src="/images/projects-icon.svg"
               alt=""
               className="projects__icon"
               width="46px"
@@ -263,7 +276,7 @@ export default function Page({params}) {
                 <figure>
                   <img
                     className="projects__item-img"
-                    src="images/big-boss.webp"
+                    src="/images/big-boss.webp"
                     alt=""
                   />
                   <figcaption>Big boss</figcaption>
@@ -276,7 +289,7 @@ export default function Page({params}) {
                 <figure>
                   <img
                     className="projects__item-img"
-                    src="images/wings.webp"
+                    src="/images/wings.webp"
                     alt=""
                   />
                   <figcaption>The wings</figcaption>
@@ -289,7 +302,7 @@ export default function Page({params}) {
                 <figure>
                   <img
                     className="projects__item-img"
-                    src="images/dino-power.webp"
+                    src="/images/dino-power.webp"
                     alt=""
                   />
                   <figcaption>Dino power</figcaption>
@@ -302,7 +315,7 @@ export default function Page({params}) {
                 <figure>
                   <img
                     className="projects__item-img"
-                    src="images/radio-ray.webp"
+                    src="/images/radio-ray.webp"
                     alt=""
                   />
                   <figcaption>Radio ray</figcaption>
