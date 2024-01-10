@@ -61,13 +61,13 @@ export default function Page({params}:  {params: any}) {
       <div className="burger-nav__block">
         <a tabIndex={-1} href="/" className="logo burger-nav__logo">
           <img
-            src="images/logo-black.svg"
+            src="/images/logo-black.svg"
             alt="ElectroPuzzle"
             className="logo__img burger-nav__logo-img"
           />
         </a>
         <button tabIndex={-1} id="burger-close" className="burger-nav__closes">
-          <img src="images/cancel.svg" alt="" className="burger-nav__closes-icon" />
+          <img src="/images/cancel.svg" alt="" className="burger-nav__closes-icon" />
         </button>
         <ul className="burger-nav__list">
           <li className="burger-nav__item">
@@ -210,25 +210,25 @@ export default function Page({params}:  {params: any}) {
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-three.webp" alt="" />
+                <img src="/images/video-three.webp" alt="" />
               </div>
               <div
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-vour.webp" alt="" />
+                <img src="/images/video-vour.webp" alt="" />
               </div>
               <div
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-five.webp" alt="" />
+                <img src="/images/video-five.webp" alt="" />
               </div>
               <div
                 // onClick={() => openVideo('videos/video-one.mp4')}
                 className="product-video__item"
               >
-                <img src="images/video-six.webp" alt="" />
+                <img src="/images/video-six.webp" alt="" />
               </div>
             </section>
 
@@ -261,7 +261,7 @@ export default function Page({params}:  {params: any}) {
         <div className="container">
           <div className="projects__head">
             <img
-              src="images/projects-icon.svg"
+              src="/images/projects-icon.svg"
               alt=""
               className="projects__icon"
               width="46px"
@@ -276,7 +276,7 @@ export default function Page({params}:  {params: any}) {
                 <figure>
                   <img
                     className="projects__item-img"
-                    src="images/big-boss.webp"
+                    src="/images/big-boss.webp"
                     alt=""
                   />
                   <figcaption>Big boss</figcaption>
@@ -289,7 +289,7 @@ export default function Page({params}:  {params: any}) {
                 <figure>
                   <img
                     className="projects__item-img"
-                    src="images/wings.webp"
+                    src="/images/wings.webp"
                     alt=""
                   />
                   <figcaption>The wings</figcaption>
@@ -302,7 +302,7 @@ export default function Page({params}:  {params: any}) {
                 <figure>
                   <img
                     className="projects__item-img"
-                    src="images/dino-power.webp"
+                    src="/images/dino-power.webp"
                     alt=""
                   />
                   <figcaption>Dino power</figcaption>
@@ -315,7 +315,7 @@ export default function Page({params}:  {params: any}) {
                 <figure>
                   <img
                     className="projects__item-img"
-                    src="images/radio-ray.webp"
+                    src="/images/radio-ray.webp"
                     alt=""
                   />
                   <figcaption>Radio ray</figcaption>
