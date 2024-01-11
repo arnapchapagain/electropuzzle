@@ -64,8 +64,7 @@ export default factories.createCoreController(
                     where: { id: pedalId },
                 });
                 if (!pedal) return ctx.badRequest(`Pedal with id ${pedalId} not found`);
-            }            
-            console.log(body.pedal_ids);
+            }
             var newBasket = await strapi.db.query("api::basket.basket").update({
                 where: { id: basketId },
                 data: {
