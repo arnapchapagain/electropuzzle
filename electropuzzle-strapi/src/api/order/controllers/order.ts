@@ -156,6 +156,11 @@ async function createPaymentPayload(
   let totalCost = 0;
   for (const pedal of pedals) {
     const pedalInfo = await fetchPedalInfo(pedal.id);
+    var vatCode = 1;
+    // if pedal has vat_code, use it
+    if (pedalInfo.vat_code && pedalInfo.vat_code.code){
+      vatCode = pedalInfo.vat_code.code;
+    }
     let pedalPrice = await calculatePedalPrice(pedalInfo, order.promo_codes);
     totalCost += pedalPrice;
     items.push({
@@ -165,7 +170,7 @@ async function createPaymentPayload(
         value: pedalPrice,
         currency: "RUB",
       },
-      vat_code: pedalInfo.vat_code.code,
+      vat_code: vatCode,
     });
   }
   return {
