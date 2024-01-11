@@ -1,8 +1,15 @@
-import "@/app/style.min.css"
+"use client"; // Error components must be Client Components
 
-export default function ErrorPage() {
+import { useEffect } from "react";
+
+export default function Error({ error, reset }) {
+  useEffect(() => {
+    // Log the error to an error reporting service
+    console.error(error);
+  }, [error]);
+
   return (
-    <>
+    <div className="bg-white">
       <header className="header">
         <div className="container header__container">
           <a href="/" className="logo header__logo">
@@ -31,6 +38,6 @@ export default function ErrorPage() {
           </div>
         </div>
       </main>
-    </>
+    </div>
   );
 }

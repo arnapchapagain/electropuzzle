@@ -2,16 +2,95 @@
 
 import Script from "next/script";
 import Navbar from "../components/Navbar/Navbar";
-import { deleteFromBasket, getBasket } from "@/verdor/basket/basket";
-import { getProductBySlug } from "@/data/pedals";
+import { deleteFromBasket, getBasket } from "@/vendor/basket/basket";
 import { useEffect, useState } from "react";
+import { getProductBySlug } from "../api/pedals/getPedalBySlug";
+import { validatePromoCode } from "../api/pedals/checkPromoCode";
+import Footer from "../components/Footer/Footer";
+import { shippingCosts } from "../api/shippingCost/getShippingCost";
 
 export default function BasketPage() {
   const [basket, setBasket] = useState<any>(getBasket());
+  const [promoCode, setPromoCode] = useState<string>("");
+  const [shipToPlace, setShipToPlace] = useState<string>("");
+  const [shipOptions, setShipOptions] = useState<any>([]);
+  const [shipCosts, setShipCosts] = useState<any>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  function reloadBasket() {
-    setBasket(getBasket());
+  async function iterateBasket(e: any) {
+    e.preventDefault();
+    let tempBasket = [...basket];
+
+    await Promise.all(
+      tempBasket.map(async (product: any) => {
+        const ourProduct = await getProductBySlug(product.productSlug);
+        if (ourProduct) {
+          product.total = ourProduct?.attributes?.price * product.quantity;
+        }
+
+        const res = await validatePromoCode({ promoCode, pedalId: product.id });
+        if (res?.data) {
+          const discountPercentage = res.data.attributes.discount_percentage;
+          const priceBeforeDiscount = product.total || 0;
+          product.total =
+            priceBeforeDiscount -
+            (priceBeforeDiscount * discountPercentage) / 100;
+
+          setTotalPrice((prev) => {
+            return (prev += product.total);
+          });
+        }
+      })
+    );
+
+    setBasket(tempBasket);
+    console.log("yataa", totalPrice);
   }
+
+  async function calculateTotalPrice(
+    basket: { productSlug: string; quantity: number }[]
+  ) {
+    let totalPrice = 0;
+
+    for (const item of basket) {
+      const product = await getProductBySlug(item.productSlug);
+      totalPrice += product.attributes.price * item.quantity;
+    }
+
+    setTotalPrice(totalPrice);
+  }
+
+  function getShippingOptions() {
+    shippingCosts().then((res: any) => {
+      const locations = res.data.shippingCosts.data.map(
+        (item: any) => item.attributes.location
+      );
+      setShipOptions(locations);
+    });
+  }
+
+  function getShippingCost() {
+    shippingCosts().then((res: any) => {
+      const cost = res.data.shippingCosts.data.find(
+        (item: any) => item.attributes.location === shipToPlace
+      )?.attributes.cost;
+
+      if (cost) {
+        setShipCosts(cost);
+      } else {
+      }
+    });
+  }
+
+  useEffect(() => {
+    getShippingOptions();
+    console.log(basket);
+  }, [basket]);
+
+  useEffect(() => {
+    getShippingCost();
+    calculateTotalPrice(basket);
+  }, [shipToPlace]);
 
   return (
     <>
@@ -22,7 +101,7 @@ export default function BasketPage() {
           <div className="container basket-container">
             <div className="basket-content">
               <div className="basket-content__block">
-                <section className="basket-goods basket-content__goods">
+                <section className="basket-goods flex flex-col gap-5 basket-content__goods">
                   {basket.map(
                     (
                       product: { productSlug: string; quantity: number },
@@ -30,18 +109,16 @@ export default function BasketPage() {
                     ) => (
                       <div key={index}>
                         <EachBasketProduct
-                          reloadBasket={reloadBasket}
                           quantity={product.quantity}
                           productSlug={product.productSlug}
+                          setBasket={setBasket}
                         />
                       </div>
                     )
                   )}
                 </section>
                 <section className="basket-info basket-content__info">
-                  <h3 className="basket-content__title">
-                    Информация о доставке
-                  </h3>
+                  <h3 className="basket-content__title"></h3>
 
                   <form id="form-info" action="" className="basket-info__form">
                     <fieldset className="basket-info__main">
@@ -207,12 +284,15 @@ export default function BasketPage() {
                     <input
                       name="promo"
                       type="text"
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value)}
                       placeholder="Ввести промкод"
                       className="basket-pay__input-promo"
                     />
                     <button
                       className="basket-pay__btn-promo btn-green"
                       type="submit"
+                      onClick={iterateBasket}
                     >
                       Применить
                     </button>
@@ -221,9 +301,22 @@ export default function BasketPage() {
                 <form id="form-pay" action="" className="basket-pay__form">
                   <fieldset>
                     <legend className="basket-pay__form-title">
-                      Детали оплаты
+                      Отгрузочные реквизиты
                     </legend>
-                    <div className="custom-radio">
+                    <select
+                      required
+                      value={shipToPlace}
+                      onChange={(e) => setShipToPlace(e.target.value)}
+                      className="py-4 px-4 pe-9 block w-full border-gray-200 rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                    >
+                      <option value="" disabled selected>
+                        Select your option
+                      </option>
+                      {shipOptions.map((option: any, index: number) => (
+                        <option>{option}</option>
+                      ))}
+                    </select>
+                    {/* <div className="custom-radio">
                       <label>
                         <input checked type="radio" name="radio" />
                         <div className="custom-radio__label">
@@ -240,25 +333,40 @@ export default function BasketPage() {
                           Заказать на сайте
                         </div>
                       </label>
-                    </div>
+                    </div> */}
                   </fieldset>
                 </form>
-                <div className="basket-pay__info">
-                  <p className="basket-pay__text">Цена товаров</p>
-                  <p className="basket-pay__price">11000.00 ₽</p>
+                <div>
+                  {basket.map(
+                    (
+                      product: {
+                        productSlug: string;
+                        quantity: number;
+                        total: number;
+                        attributes?: { name: string };
+                      },
+                      index: number
+                    ) => (
+                      <div key={index}>
+                        <BasketProductPrices product={product} />
+                      </div>
+                    )
+                  )}
+
+                  {/* Shipping Cost */}
+                  <div className="basket-pay__info">
+                    <p className="basket-pay__text">Shipping Cost</p>
+                    <p className="basket-pay__price">{shipCosts} ₽</p>
+                  </div>
+                  <hr />
+                  <div className="basket-pay__info">
+                    <p className="basket-pay__text">Final Amount</p>
+                    <p className="basket-pay__price">
+                      {totalPrice + shipCosts} ₽
+                    </p>
+                  </div>
                 </div>
-                <div className="basket-pay__info">
-                  <p className="basket-pay__text">Стоимость доставки</p>
-                  <p className="basket-pay__price">500.00 ₽</p>
-                </div>
-                <div className="basket-pay__info">
-                  <p className="basket-pay__text">Скидка по купону</p>
-                  <p className="basket-pay__price">-1500.00 ₽</p>
-                </div>
-                <div className="basket-pay__info">
-                  <p className="basket-pay__text">Итого</p>
-                  <p className="basket-pay__price">10000.00 ₽</p>
-                </div>
+
                 <button
                   id="showPopup"
                   className="btn-green basket-pay__btn-pay"
@@ -271,221 +379,83 @@ export default function BasketPage() {
           </div>
         </main>
 
-        <footer className="footer">
-          <div className="container footer__container">
-            <div className="footer__item footer__item_logo">
-              <a href="index.html" className="logo footer__logo">
-                <img
-                  src="images/logo.svg"
-                  alt="ElectroPuzzle"
-                  className="logo__img footer__logo-img"
-                />
-                <span className="logo__text footer__logo-text">
-                  ElectroPuzzle
-                </span>
-              </a>
-              <form id="footer-form" action="" className="footer__form">
-                <div className="footer__email">
-                  <input
-                    name="email"
-                    id="footer-input"
-                    type="email"
-                    className="footer__input"
-                    placeholder="john@example.com"
-                    required
-                  />
-                  <button id="footer-btn" className="footer__btn" type="submit">
-                    <img
-                      className="footer__btn-img"
-                      src="images/email-arrow.svg"
-                      alt=""
-                    />
-                  </button>
-                </div>
-              </form>
-            </div>
-            <div className="footer__item footer__item_pedals">
-              <h2 className="footer__item-title">ПЕДАЛИ</h2>
-              <ul className="footer__list footer__list_pedals">
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Дилеи
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Бустеры
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Овердрайвы
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Дисторшены
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Модуляция
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Фузы
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Компрессоры
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer__item">
-              <h2 className="footer__item-title">СТРАНИЦЫ</h2>
-              <ul className="footer__list footer__list_pages">
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Главная
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Педали
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Контакты
-                  </a>
-                </li>
-                <li className="footer__list-item">
-                  <a href="#" className="footer__list-link">
-                    Новости
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="footer__item footer__item_img-block">
-              <img
-                width="264"
-                height="264"
-                className="footer__item-img"
-                src="images/footer-pedals-img.webp"
-                alt=""
-              />
-            </div>
-          </div>
-          <div className="footer__text">
-            © 2023 ElectroPuzzle. Design by Kiselev Roman.
-          </div>
-        </footer>
-      </div>
-
-      <div className="overlay" id="overlay"></div>
-
-      <div className="popup-container" id="popup1">
-        <div className="blockcentr">
-          <h3 className="popup-pay__title">Оформление заказа</h3>
-          <form action="" className="popup-pay__form">
-            <fieldset>
-              <label htmlFor="popup-pay-fio">
-                <span>ФИО*</span>
-                <input
-                  name="fio"
-                  required
-                  id="inputFio"
-                  type="text"
-                  className="popup-pay__input"
-                />
-              </label>
-              <label htmlFor="popup-pay-tel">
-                <span>Телефон*</span>
-                <input
-                  name="tel"
-                  required
-                  id="inputTel"
-                  type="tel"
-                  className="popup-pay__input"
-                />
-              </label>
-            </fieldset>
-            <button
-              id="submit1"
-              type="submit"
-              className="popup-pay__btn openokno openokno2 btn-green"
-            >
-              Продолжить
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="popup-container" id="popup2">
-        <div className="blockcentr2">
-          <div className="popup-pay__img-block">
-            <img
-              src="images/popup-pay-icon.webp"
-              alt=""
-              className="popup-pay__img"
-            />
-          </div>
-
-          <h3 className="popup-pay__title">Заказ принят</h3>
-          <button
-            id="closePopup2"
-            type="button"
-            className="popup-pay__btn openokno2 btn-green"
-          >
-            Продолжить
-          </button>
-        </div>
+        <Footer />
       </div>
     </>
   );
 }
 
+type ProductType = {
+  attributes: {
+    image: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
+    name: string;
+    price: number;
+    description: string;
+  };
+};
+
 function EachBasketProduct({
   productSlug,
   quantity,
-  reloadBasket
+  setBasket,
 }: {
   productSlug: string;
   quantity: number;
-  reloadBasket: any;
+  setBasket: any;
 }) {
-  const product = getProductBySlug(productSlug);
+  const [product, setProduct] = useState<ProductType | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const fetchedProduct = await getProductBySlug(productSlug);
+      setProduct(fetchedProduct);
+    };
+
+    fetchProduct();
+  }, [productSlug]);
+
+  if (!product) {
+    return null;
+  }
 
   return (
     <div>
-      {/* <h3 className="basket-content__title"></h3> */}
-      <div id="basketItem1" className="basket-goods__item basket-item">
+      <div
+        id="basketItem1"
+        className="basket-goods__item basket-item flex gap-5"
+      >
         <img
           src={
-            getProductBySlug(productSlug)?.attributes.image.data.attributes.url
+            "http://localhost:1337" +
+            product?.attributes.image.data.attributes.url
           }
           alt=""
-          className="basket-goods__img"
+          className="h-40 aspect-square w-40"
         />
-        <div className="basket-goods__name">
-          <h3 className="basket-goods__item-title">
-            {product?.attributes.name}
-          </h3>
-          <p className="basket-goods__ver">Вариант: Стандарт</p>
+        <div className="w-[100%]">
+          <h3 className="font-bold text-3xl">{product?.attributes.name}</h3>
+          <p className="text-xl line-clamp-3">
+            {product.attributes.description}
+          </p>
         </div>
         <div className="basket-goods__info">
-          <p className="basket-goods__price">{product?.attributes.price} ₽</p>
-          <p className="basket-goods__sum">Количество: {quantity} шт</p>
+          <p className="text-xl">{product?.attributes.price * quantity} ₽</p>
+          <p className="text-xl">Количество: {quantity} шт</p>
         </div>
-        <button id="basket-goods-btn" className="basket-goods__btn">
+        <button
+          id="basket-goods-btn"
+          className="basket-goods__btn hover:scale-[105%]"
+        >
           <img
             onClick={() => {
               deleteFromBasket({ productSlug: productSlug, quantity: 1 });
-              reloadBasket();
+              setBasket(getBasket());
             }}
             src="images/trash-icon.svg"
             alt=""
@@ -496,6 +466,46 @@ function EachBasketProduct({
       <div id="empty" className="empty">
         Пусто
       </div>
+    </div>
+  );
+}
+
+function BasketProductPrices({
+  product,
+}: {
+  product: {
+    productSlug: string;
+    quantity: number;
+    total: number;
+    attributes?: { name: string };
+  };
+}) {
+  const [hamroProduct, setHamroProduct] = useState<ProductType | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const fetchedProduct = await getProductBySlug(product.productSlug);
+      setHamroProduct(fetchedProduct);
+    };
+
+    fetchProduct();
+  }, [setHamroProduct]);
+
+  if (!product) {
+    return null;
+  }
+
+  return (
+    <div className="basket-pay__info">
+      <p className="basket-pay__text">{hamroProduct?.attributes.name}</p>
+      <p className="basket-pay__price">
+        {Math.round(
+          product.total
+            ? product.total
+            : product.quantity * hamroProduct?.attributes.price!
+        )}
+        ₽
+      </p>
     </div>
   );
 }
