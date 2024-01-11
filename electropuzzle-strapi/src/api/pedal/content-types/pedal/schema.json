@@ -145,12 +145,18 @@
       "target": "api::category.category"
     },
     "youtube_links": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::youtube-link.youtube-link"
+    },
+    "avito_link": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "json"
+      "type": "string",
+      "required": true
     }
   }
 }
