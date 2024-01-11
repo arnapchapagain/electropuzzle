@@ -6,20 +6,13 @@ import { factories } from '@strapi/strapi'
 import { Context } from 'koa';
 import Joi from "joi";
 
-const createBasketSchema = Joi.object({
+const basketSchema = Joi.object({
     slugs: Joi.array().items(Joi.string()).required(),
 });
 
-const updateBasketSchema = Joi.object({
-    pedal_ids: Joi.array().items(Joi.number()).required(),
-});
 
-interface ICreateBasket {
+interface IBasket {
     slugs: string[];
-}
-
-interface IUpdateBasket {
-    pedal_ids: number[];
 }
 
 export default factories.createCoreController(
@@ -28,9 +21,9 @@ export default factories.createCoreController(
 
         async create(ctx: Context) {
             await this.validateQuery(ctx);
-            const {error, value} = createBasketSchema.validate(ctx.request.body);
+            const {error, value} = basketSchema.validate(ctx.request.body);
             if (error) return ctx.badRequest(error);
-            const body: ICreateBasket = value;
+            const body: IBasket = value;
             if (body.slugs.length === 0) return ctx.badRequest("Basket is empty");
             var pedalIds: number[] = [];
             for (const slug of body.slugs) {
@@ -56,19 +49,21 @@ export default factories.createCoreController(
                 where: { id: basketId },
             });
             if (!basket) return ctx.badRequest(`Basket with id ${basketId} not found`);
-            const {error, value} = updateBasketSchema.validate(ctx.request.body);
+            const {error, value} = basketSchema.validate(ctx.request.body);
             if (error) return ctx.badRequest(error);
-            const body: IUpdateBasket = value;
-            for (const pedalId of body.pedal_ids) {
+            const body: IBasket = value;
+            var pedalIds = [];
+            for (const slug of body.slugs) {
                 const pedal = await strapi.db.query("api::pedal.pedal").findOne({
-                    where: { id: pedalId },
+                    where: { slug: slug },
                 });
-                if (!pedal) return ctx.badRequest(`Pedal with id ${pedalId} not found`);
+                if (!pedal) return ctx.badRequest(`Pedal with slug ${slug} not found`);
+                pedalIds.push(pedal.id);
             }
             var newBasket = await strapi.db.query("api::basket.basket").update({
                 where: { id: basketId },
                 data: {
-                    pedals: body.pedal_ids
+                    pedals: pedalIds
                 }
             });
             return this.transformResponse(newBasket);
