@@ -8,6 +8,9 @@ import { getProductBySlug } from "../api/pedals/getPedalBySlug";
 import { validatePromoCode } from "../api/pedals/checkPromoCode";
 import Footer from "../components/Footer/Footer";
 import { shippingCosts } from "../api/shippingCost/getShippingCost";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import BACKEND_URI from "../data";
 
 export default function BasketPage() {
   const [basket, setBasket] = useState<any>(getBasket());
@@ -28,6 +31,17 @@ export default function BasketPage() {
           product.total = ourProduct?.attributes?.price * product.quantity;
         }
 
+        if (!promoCode) return toast.error('Please enter a promocode', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
         const res = await validatePromoCode({ promoCode, pedalId: product.id });
         if (res?.data) {
           const discountPercentage = res.data.attributes.discount_percentage;
@@ -38,6 +52,27 @@ export default function BasketPage() {
 
           setTotalPrice((prev) => {
             return (prev += product.total);
+          });
+          return toast.success('Promocode applied successfully', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          return toast.error('Promocode is not valid', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
           });
         }
       })
@@ -381,6 +416,21 @@ export default function BasketPage() {
 
         <Footer />
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
+        {/* Same as */}
+      <ToastContainer />
     </>
   );
 }
@@ -432,7 +482,7 @@ function EachBasketProduct({
       >
         <img
           src={
-            "http://localhost:1337" +
+            `${BACKEND_URI}` +
             product?.attributes.image.data.attributes.url
           }
           alt=""

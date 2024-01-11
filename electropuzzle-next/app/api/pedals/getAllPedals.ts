@@ -10,6 +10,7 @@ export async function getAllPedals() {
   const query = `query{
     pedals{
       data{
+        id
         attributes{
           name
           based_on
@@ -57,6 +58,25 @@ export async function getAllPedals() {
               }
             }
           }
+          youtube_links{
+            data{
+              attributes{
+                link
+                embed_code
+                preview_image{
+                  data{
+                    attributes{
+                      name
+                      alternativeText
+                      url
+                      previewUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+          avito_link
         }
       }
     }
