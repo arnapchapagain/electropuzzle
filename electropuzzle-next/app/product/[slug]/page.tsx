@@ -283,7 +283,7 @@ export default function Page({ params }: { params: any }) {
               </h3>
 
               <div className="flex flex-row flex-wrap gap-10">
-              {mainProductData.youtube_links.data.map((video: any, index) => (
+              {mainProductData.youtube_links.data.map((video: any, index: number) => (
                <div key={index} className="">
                 {/* Check if Embed Code is present */}
                 {video.attributes.embed_code ? (

@@ -25,42 +25,34 @@ export default function Navbar() {
         className="header bg-black bg-opacity-30"
         style={{ zIndex: 9999 }}
       >
-        <div className="container header__container hidden lg:block">
-          <a href="/" className="logo header__logo">
-            <img
-              src="/images/logo.svg"
-              alt="ElectroPuzzle"
-              className="logo__img header__logo-img"
-            />
-            <span className="logo__text header__logo-text">ElectroPuzzle</span>
+        <div className="flex px-[10%] py-10">
+          <a href="/" className="logo flex gap-5">
+            <img src="/images/logo.svg" alt="ElectroPuzzle" className="" />
+            <span className="font-bold text-3xl">ElectroPuzzle</span>
           </a>
-          <nav className="header__nav">
-            <ul className="nav__list">
-              <li className="nav__item">
-                <a href="/" className="nav__item-link">
+          <nav className="hidden lg:block">
+            <ul className="flex gap-10 items-center">
+              <li className="">
+                <a href="/" className="text-2xl">
                   Главная
                 </a>
               </li>
-              <li className="nav__item">
-                <a href="/pedals" className="nav__item-link">
+              <li className="">
+                <a href="/pedals" className="text-2xl">
                   Педали
                 </a>
               </li>
-              <li className="nav__item">
-                <a href="/contacts" className="nav__item-link">
+              <li className="">
+                <a href="/contacts" className="text-2xl">
                   Контакты
                 </a>
               </li>
-              <li className="nav__item">
+              <li className="">
                 <a
                   href="/basket"
                   className="relative inline-flex justify-center items-center h-[3.8rem] w-[4.5rem] text-sm font-semibold rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm  dark:bg-slate-900 dark:bg-opacity-20 dark:border-gray-800 dark:text-white  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 >
-                  <img
-                    src="/images/basket-icon.svg"
-                    alt=""
-                    className="nav__item-icon"
-                  />
+                  <img src="/images/basket-icon.svg" alt="" className="" />
                   <span className="absolute top-0 end-0 inline-flex items-center py-2 px-3 rounded-full text-xs font-medium transform -translate-y-1/2 translate-x-1/2 bg-red-500 text-white">
                     {totalBasketQuantity}
                   </span>
@@ -68,6 +60,9 @@ export default function Navbar() {
               </li>
             </ul>
           </nav>
+          <div>
+            <Hamburger />
+          </div>
 
           {/* <button tabIndex={-1} id="burger" className="header__menu">
             <svg
@@ -100,9 +95,6 @@ export default function Navbar() {
               </defs>
             </svg>
           </button> */}
-          <div>
-            <Hamburger />
-          </div>
         </div>
       </header>
     </>

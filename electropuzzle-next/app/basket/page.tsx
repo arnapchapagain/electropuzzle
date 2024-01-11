@@ -28,7 +28,7 @@ export default function BasketPage() {
   });
 
   // Handler function to update state when input values change
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
