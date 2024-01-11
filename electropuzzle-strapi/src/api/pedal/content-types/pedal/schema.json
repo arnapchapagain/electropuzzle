@@ -157,6 +157,11 @@
       },
       "type": "string",
       "required": true
+    },
+    "vat_code": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::vat-code.vat-code"
     }
   }
 }
