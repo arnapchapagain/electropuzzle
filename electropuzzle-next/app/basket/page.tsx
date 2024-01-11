@@ -53,7 +53,6 @@ export default function BasketPage() {
           setTotalPrice((prev) => {
             return (prev += product.total);
           });
-
           return toast.success('Promocode applied successfully', {
             position: "top-right",
             autoClose: 5000,
