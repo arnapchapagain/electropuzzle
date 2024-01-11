@@ -20,6 +20,24 @@ export default function BasketPage() {
   const [shipCosts, setShipCosts] = useState<any>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
+  const [formData, setFormData] = useState({
+    full_name: '',
+    phone: '',
+    email: '',
+    address_street: '',
+  });
+
+  // Handler function to update state when input values change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    console.log(formData)
+  };
+
   async function iterateBasket(e: any) {
     e.preventDefault();
     let tempBasket = [...basket];
@@ -79,7 +97,6 @@ export default function BasketPage() {
     );
 
     setBasket(tempBasket);
-    console.log("yataa", totalPrice);
   }
 
   async function calculateTotalPrice(
@@ -119,7 +136,6 @@ export default function BasketPage() {
 
   useEffect(() => {
     getShippingOptions();
-    console.log(basket);
   }, [basket]);
 
   useEffect(() => {
@@ -152,28 +168,25 @@ export default function BasketPage() {
                     )
                   )}
                 </section>
-                <section className="basket-info basket-content__info">
+                <section className="basket-info basket-content__info mb-12">
                   <h3 className="basket-content__title"></h3>
 
                   <form id="form-info" action="" className="basket-info__form">
                     <fieldset className="basket-info__main">
-                      <label
-                        htmlFor="fio"
-                        className="basket-info__fio basket-info__title-input"
-                      >
+                      <label htmlFor="fio" className="basket-info__fio basket-info__title-input">
                         <span>ФИО*</span>
                         <input
-                          name="fio"
+                          name="full_name"
                           id="fio"
                           type="text"
                           className="basket-info__input basket-info__fio-input"
                           required
+                          value={formData.full_name}
+                          onChange={handleInputChange}
                         />
                       </label>
-                      <label
-                        htmlFor="phone"
-                        className="basket-info__phone basket-info__title-input"
-                      >
+
+                      <label htmlFor="phone" className="basket-info__phone basket-info__title-input">
                         <span>Телефон*</span>
                         <input
                           name="phone"
@@ -181,22 +194,36 @@ export default function BasketPage() {
                           type="tel"
                           className="basket-info__input basket-info__phone-input"
                           required
+                          value={formData.phone}
+                          onChange={handleInputChange}
                         />
                       </label>
-                      <label
-                        htmlFor="email"
-                        className="basket-info__email basket-info__title-input"
-                      >
+                      <label htmlFor="email" className="basket-info__email basket-info__title-input">
                         <span>Email</span>
                         <input
                           name="email"
                           id="email"
                           type="email"
                           className="basket-info__input basket-info__email-input"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                        />
+                      </label>
+                      <label htmlFor="address_street" className="basket-info__email basket-info__title-input">
+                        <span>Address</span>
+                        <input
+                          name="address_street"
+                          id="address_street"
+                          type="text"
+                          className="basket-info__input basket-info__email-input"
+                          value={formData.address_street}
+                          onChange={handleInputChange}
                         />
                       </label>
                     </fieldset>
-                    <fieldset className="basket-info__extra">
+
+                    {/* additional info */}
+                    {/* <fieldset className="basket-info__extra">
                       <div className="accordion">
                         <div className="accordion-item">
                           <div className="accordion-header">
@@ -286,7 +313,7 @@ export default function BasketPage() {
                           </div>
                         </div>
                       </div>
-                    </fieldset>
+                    </fieldset> */}
                   </form>
                 </section>
               </div>

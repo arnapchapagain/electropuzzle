@@ -11,8 +11,6 @@ import fetchProductData from "./fetchProductData.js";
 import Carousel from "reactjs-nextjs-carousel";
 import { useEffect, useState } from "react";
 import { addToBasket } from "@/vendor/basket/basket";
-import { setLazyProp } from "next/dist/server/api-utils";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default function Page({ params }: { params: any }) {
@@ -26,9 +24,9 @@ export default function Page({ params }: { params: any }) {
     fetchProductData(params, setPedalData, setLoading, setError);
   }, []);
 
-  useEffect(() => {
-    console.log(pedalData);
-  }, [pedalData]);
+  // useEffect(() => {
+  //   console.log(pedalData);
+  // }, [pedalData]);
 
   let mainImage;
   let additionalImages;
@@ -158,7 +156,7 @@ export default function Page({ params }: { params: any }) {
                       action=""
                     >
                       <div className="counter">
-                        <button
+                        {/* <button
                           type="button"
                           onClick={() => {
                             if (orderQuantity - 1 > 0) {
@@ -167,7 +165,7 @@ export default function Page({ params }: { params: any }) {
                           }}
                         >
                           -
-                        </button>
+                        </button> */}
 
                         <input
                           type="text"
@@ -176,7 +174,7 @@ export default function Page({ params }: { params: any }) {
                           name="sum"
                         />
 
-                        <button
+                        {/* <button
                           type="button"
                           onClick={() => {
                             if (orderQuantity + 1 <= mainProductData.stock) {
@@ -185,7 +183,7 @@ export default function Page({ params }: { params: any }) {
                           }}
                         >
                           +
-                        </button>
+                        </button> */}
                       </div>
                     </form>
 
@@ -285,7 +283,7 @@ export default function Page({ params }: { params: any }) {
               </h3>
 
               <div className="flex flex-row flex-wrap gap-10">
-              {mainProductData.youtube_links.data.map((video, index) => (
+              {mainProductData.youtube_links.data.map((video: any, index) => (
                <div key={index} className="">
                 {/* Check if Embed Code is present */}
                 {video.attributes.embed_code ? (

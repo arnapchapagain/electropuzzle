@@ -2218,9 +2218,7 @@ video {
     width: 100%;
     margin: 0;
   }
-  .basket-info {
-    display: none;
-  }
+
   .basket-goods__item {
     height: 14rem;
   }

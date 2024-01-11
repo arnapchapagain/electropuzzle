@@ -1,4 +1,6 @@
+import { createBasket } from "@/app/api/basket/createBasket";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export function addToBasket({
     productSlug,
@@ -21,6 +23,18 @@ export function addToBasket({
 
     console.log("parsedBasket", parsedBasket);
     Cookies.set("basket", JSON.stringify(parsedBasket));
+    toast.success('Successfully added to cart!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
+    createBasket()
+    return;
 }
 
 
@@ -45,6 +59,8 @@ export function deleteFromBasket({
             );
             console.log("updatedBasket", updatedBasket);
             Cookies.set("basket", JSON.stringify(updatedBasket));
+
+            createBasket()
             return;
         }
     }
