@@ -12,6 +12,7 @@ import Carousel from "reactjs-nextjs-carousel";
 import { useEffect, useState } from "react";
 import { addToBasket } from "@/vendor/basket/basket";
 import { setLazyProp } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 export default function Page({ params }: { params: any }) {
   const [orderQuantity, setOrderQuantity] = useState(1);
@@ -192,12 +193,13 @@ export default function Page({ params }: { params: any }) {
                     </p>
                   </div>
                   <div className="product-item__btn-block">
-                    <button
-                      id="showPopup"
-                      className="btn-green product-item__btn-buy"
+                    <a
+                      href={mainProductData.avito_link}
+                      style={{color: "white !important"}}
+                      className="w-50 py-6 me-6 rounded-full px-12 mb-4 bg-green-900 text-white"
                     >
-                      Купить в один клик
-                    </button>
+                      Заказать с Авито
+                    </a>
                     <button
                       className="product-item__btn-basket"
                       onClick={() => {

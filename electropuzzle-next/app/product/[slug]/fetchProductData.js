@@ -57,6 +57,25 @@ export default async function fetchProductData (params, setPedalData, setLoading
                 }
               }
             }
+            youtube_links{
+              data{
+                attributes{
+                  link
+                  embed_code
+                  preview_image{
+                    data{
+                      attributes{
+                        name
+                        alternativeText
+                        url
+                        previewUrl
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            avito_link
           }
         }
       }
