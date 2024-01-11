@@ -29,18 +29,22 @@ export default factories.createCoreController(
       if (basket.pedals.length === 0) return ctx.badRequest("Basket is empty");
 
       try {
-        let totalCost = await calculateTotalCost(basket.pedals, body.promo_codes);
-
-        body.status = 'not_completed';
+        body.status = "not_completed";
         const orderId = await createOrderEntry(body);
 
-        const payload = createPaymentPayload(totalCost.toString(), orderId.toString());
+        const payload = await createPaymentPayload(
+          orderId.toString(),
+          body,
+          basket.pedals
+        );
+        if (payload.amount.value === "0") {
+          return ctx.badRequest("Price of order must be greater than 0");
+        }
 
         const paymentInfo = await processPayment(payload, orderId);
         return this.transformResponse(paymentInfo);
-
       } catch (error) {
-          ctx.badRequest(error);
+        ctx.badRequest(error);
       }
     },
 
@@ -101,13 +105,13 @@ function validateRequestBody(ctx) {
 
 async function getBasket(basketId: number) {
   return await strapi.db.query("api::basket.basket").findOne({
-      where: { id: basketId },
-      populate: true,
+    where: { id: basketId },
+    populate: true,
   });
 }
 
 // Fetches pedal information from the database
-async function fetchPedalInfo(pedalId: string) {
+async function fetchPedalInfo(pedalId: number) {
   return await strapi.db.query("api::pedal.pedal").findOne({
     where: { id: pedalId },
     populate: true,
@@ -117,10 +121,12 @@ async function fetchPedalInfo(pedalId: string) {
 // Calculates the price of a pedal after applying applicable promo codes
 function calculateDiscountedPrice(pedalInfo: any, promoCodes: string[]) {
   let price = pedalInfo.price;
-  pedalInfo.promo_codes.forEach(applicablePromoCode => {
+  pedalInfo.promo_codes.forEach((applicablePromoCode) => {
     if (promoCodes.includes(applicablePromoCode.code)) {
       let discountAmount = pedalInfo.price * (applicablePromoCode.discount_percentage / 100);
       price -= discountAmount;
+      let vatAmount = (price * pedalInfo.vat_code.percentage) / 100;
+      price += vatAmount;
       if (price <= 0) price = 0; // Prevents negative prices
     }
   });
@@ -129,63 +135,73 @@ function calculateDiscountedPrice(pedalInfo: any, promoCodes: string[]) {
 
 // Determines the final price of a pedal, considering whether promo codes are applied or not
 async function calculatePedalPrice(pedal: any, promoCodes: string[]) {
-  const pedalInfo = await fetchPedalInfo(pedal.id);
-  if (!pedalInfo) {
-    throw new Error(`Pedal with ID ${pedal.id} not found in the database`);
-  }
-
-  return promoCodes.length > 0 ? calculateDiscountedPrice(pedalInfo, promoCodes) : pedalInfo.price;
-}
-
-// Iterates over all pedals to calculate the total cost
-async function calculateTotalCost(pedals: any[], promoCodes: string[]) {
-  let totalCost = 0;
-  if (!promoCodes) promoCodes = [];
-
-  // remove all duplicates from promoCodes so that we don't apply the same promo code twice
-  promoCodes = [...new Set(promoCodes)];
-
-  for (const pedal of pedals) {
-    const pedalPrice = await calculatePedalPrice(pedal, promoCodes);
-    totalCost += pedalPrice;
-  }
-
-  return totalCost;
+  return promoCodes.length > 0
+    ? calculateDiscountedPrice(pedal, promoCodes)
+    : pedal.price;
 }
 
 async function createOrderEntry(orderData: ICreateOrder) {
-  const entry = await strapi.entityService.create('api::order.order', {
-      data: { ...orderData }
+  const entry = await strapi.entityService.create("api::order.order", {
+    data: { ...orderData },
   });
   return entry.id;
 }
 
-function createPaymentPayload(total: string, orderId: string) {
+async function createPaymentPayload(
+  orderId: string,
+  order: ICreateOrder,
+  pedals: any[],
+) {
+  let items = [];
+  let totalCost = 0;
+  for (const pedal of pedals) {
+    const pedalInfo = await fetchPedalInfo(pedal.id);
+    let pedalPrice = await calculatePedalPrice(pedalInfo, order.promo_codes);
+    totalCost += pedalPrice;
+    items.push({
+      description: `Order of ${pedalInfo.name} by ${order.full_name}`,
+      quantity: 1,
+      amount: {
+        value: pedalPrice,
+        currency: "RUB",
+      },
+      vat_code: pedalInfo.vat_code.code,
+    });
+  }
   return {
     amount: {
-        value: total,
-        currency: 'RUB'
+      value: totalCost.toString(),
+      currency: "RUB",
     },
     payment_method_data: {
-        type: 'bank_card'
+      type: "bank_card",
     },
     confirmation: {
-        type: 'redirect',
-        return_url: process.env.CHECKOUT_SUCCESS_URL || 'http://localhost:1337/orders/success?order_id=' + orderId
-    }
+      type: "redirect",
+      return_url:
+        process.env.CHECKOUT_SUCCESS_URL ||
+        "http://localhost:1337/orders/success",
+    },
+    receipt: {
+      customer: {
+        full_name: order.full_name,
+        email: order.email,
+      },
+      items: items,
+    },
   } as ICreatePayment;
 }
 
 async function processPayment(payload, orderId) {
   let payment = await checkout.createPayment(payload, IDEMPOTENCY_KEY);
-  await strapi.entityService.update('api::order.order', orderId, {
-      data: {
-          payment_id: payment.id,
-          status: 'pending'
-      },
+  await strapi.entityService.update("api::order.order", orderId, {
+    data: {
+      payment_id: payment.id,
+      status: "pending",
+    },
   });
   return {
-      order_id: orderId,
-      payment_info: payment
+    order_id: orderId,
+    payment_info: payment,
   };
 }
