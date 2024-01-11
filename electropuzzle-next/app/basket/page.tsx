@@ -8,12 +8,9 @@ import { getProductBySlug } from "../api/pedals/getPedalBySlug";
 import { validatePromoCode } from "../api/pedals/checkPromoCode";
 import Footer from "../components/Footer/Footer";
 import { shippingCosts } from "../api/shippingCost/getShippingCost";
-<<<<<<< HEAD
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BACKEND_URI from "../data";
-=======
->>>>>>> 798b282048bd77a9239bc94415e03d3e78971227
 
 export default function BasketPage() {
   const [basket, setBasket] = useState<any>(getBasket());
@@ -34,7 +31,6 @@ export default function BasketPage() {
           product.total = ourProduct?.attributes?.price * product.quantity;
         }
 
-<<<<<<< HEAD
         if (!promoCode) return toast.error('Please enter a promocode', {
           position: "top-right",
           autoClose: 5000,
@@ -46,8 +42,6 @@ export default function BasketPage() {
           theme: "light",
         });
 
-=======
->>>>>>> 798b282048bd77a9239bc94415e03d3e78971227
         const res = await validatePromoCode({ promoCode, pedalId: product.id });
         if (res?.data) {
           const discountPercentage = res.data.attributes.discount_percentage;
@@ -59,7 +53,7 @@ export default function BasketPage() {
           setTotalPrice((prev) => {
             return (prev += product.total);
           });
-<<<<<<< HEAD
+
           return toast.success('Promocode applied successfully', {
             position: "top-right",
             autoClose: 5000,
@@ -81,14 +75,11 @@ export default function BasketPage() {
             progress: undefined,
             theme: "light",
           });
-=======
->>>>>>> 798b282048bd77a9239bc94415e03d3e78971227
         }
       })
     );
 
     setBasket(tempBasket);
-    console.log("yataa", totalPrice);
   }
 
   async function calculateTotalPrice(
@@ -128,7 +119,6 @@ export default function BasketPage() {
 
   useEffect(() => {
     getShippingOptions();
-    console.log(basket);
   }, [basket]);
 
   useEffect(() => {
