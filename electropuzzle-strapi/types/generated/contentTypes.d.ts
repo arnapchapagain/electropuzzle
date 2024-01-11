@@ -726,6 +726,38 @@ export interface PluginEmailDesignerEmailTemplate
   };
 }
 
+export interface ApiBannerBanner extends Schema.SingleType {
+  collectionName: 'banners';
+  info: {
+    singularName: 'banner';
+    pluralName: 'banners';
+    displayName: 'Banner';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    text: Attribute.String;
+    images: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiBasketBasket extends Schema.CollectionType {
   collectionName: 'baskets';
   info: {
@@ -1018,6 +1050,11 @@ export interface ApiPedalPedal extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    vat_code: Attribute.Relation<
+      'api::pedal.pedal',
+      'oneToOne',
+      'api::vat-code.vat-code'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1121,6 +1158,50 @@ export interface ApiShippingCostShippingCost extends Schema.CollectionType {
   };
 }
 
+export interface ApiVatCodeVatCode extends Schema.CollectionType {
+  collectionName: 'vat_codes';
+  info: {
+    singularName: 'vat-code';
+    pluralName: 'vat-codes';
+    displayName: 'Vat Code';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Attribute.Integer &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 6;
+      }> &
+      Attribute.DefaultTo<1>;
+    percentage: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+        max: 100;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::vat-code.vat-code',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::vat-code.vat-code',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiYoutubeLinkYoutubeLink extends Schema.CollectionType {
   collectionName: 'youtube_links';
   info: {
@@ -1170,6 +1251,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::email-designer.email-template': PluginEmailDesignerEmailTemplate;
+      'api::banner.banner': ApiBannerBanner;
       'api::basket.basket': ApiBasketBasket;
       'api::category.category': ApiCategoryCategory;
       'api::newsletter-email.newsletter-email': ApiNewsletterEmailNewsletterEmail;
@@ -1177,6 +1259,7 @@ declare module '@strapi/types' {
       'api::pedal.pedal': ApiPedalPedal;
       'api::promo-code.promo-code': ApiPromoCodePromoCode;
       'api::shipping-cost.shipping-cost': ApiShippingCostShippingCost;
+      'api::vat-code.vat-code': ApiVatCodeVatCode;
       'api::youtube-link.youtube-link': ApiYoutubeLinkYoutubeLink;
     }
   }
