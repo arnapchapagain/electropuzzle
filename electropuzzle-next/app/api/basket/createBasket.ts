@@ -6,7 +6,8 @@ import { updateBasket } from "./updateBasket";
 export async function createBasket() {
   const url = `${BACKEND_URI}/api/baskets`;
 
-  const existingBasketID = Cookies.get("basketID");
+  const existingBasketID = Cookies.get("BasketID");
+  console.log(existingBasketID)
 
   if (existingBasketID) {
     updateBasket(existingBasketID)
@@ -16,22 +17,26 @@ export async function createBasket() {
   const rawBasket = getBasket()
   console.log(rawBasket)
 
-  const allPedalsSlug = rawBasket.map((item: any) => `"${item.productSlug}"`).join(', ');
+  if (!rawBasket) return
+
+  const allPedalsSlug: any = [];
+
+  for (const obj of rawBasket) {
+    allPedalsSlug.push(obj.productSlug);
+  }
+  
+  console.log(allPedalsSlug)
 
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
 
-  const basketData = `{
-    "slugs": [${allPedalsSlug}]
-  }`
-
   try {
     const response = await fetch(url, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({basketData})
+      body: JSON.stringify({slugs: allPedalsSlug})
     })
 
     if (!response.ok) {
@@ -39,7 +44,8 @@ export async function createBasket() {
     }
 
     const data = await response.json();
-    return data;
+    Cookies.set("BasketID", JSON.stringify(data.data.id));
+    return;
 
   } catch (error) {
     console.log(error);

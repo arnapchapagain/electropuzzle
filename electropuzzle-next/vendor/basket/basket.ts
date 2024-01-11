@@ -23,7 +23,9 @@ export function addToBasket({
 
     console.log("parsedBasket", parsedBasket);
     Cookies.set("basket", JSON.stringify(parsedBasket));
-    toast.success('Successfully added to cart!', {
+    createBasket()
+
+    return toast.success('Successfully added to cart!', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -33,8 +35,6 @@ export function addToBasket({
         progress: undefined,
         theme: "light",
     });
-    createBasket()
-    return;
 }
 
 
@@ -65,6 +65,7 @@ export function deleteFromBasket({
         }
     }
     Cookies.set("basket", JSON.stringify(parsedBasket));
+    createBasket()
 }
 
 export function getBasket() {
