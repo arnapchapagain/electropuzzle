@@ -79,7 +79,7 @@ export default function Page({ params }: { params: any }) {
             <li className="burger-nav__item">
               <a
                 tabIndex={-1}
-                href="index.html"
+                href="/"
                 className="burger-nav__item-link"
               >
                 Главная
@@ -88,7 +88,7 @@ export default function Page({ params }: { params: any }) {
             <li className="burger-nav__item">
               <a
                 tabIndex={-1}
-                href="pedals.html"
+                href="/pedals"
                 className="burger-nav__item-link"
               >
                 Педали
@@ -97,7 +97,7 @@ export default function Page({ params }: { params: any }) {
             <li className="burger-nav__item">
               <a
                 tabIndex={-1}
-                href="contacts.html"
+                href="/contacts"
                 className="burger-nav__item-link"
               >
                 Контакты
@@ -106,7 +106,7 @@ export default function Page({ params }: { params: any }) {
             <li className="burger-nav__item">
               <a
                 tabIndex={-1}
-                href="basket.html"
+                href="/basket"
                 className="burger-nav__item-link"
               >
                 Корзина
@@ -353,7 +353,7 @@ export default function Page({ params }: { params: any }) {
                 </div>
               </a>
 
-              <a href="404.html" className="projects__item-link">
+              <a href="/404" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img

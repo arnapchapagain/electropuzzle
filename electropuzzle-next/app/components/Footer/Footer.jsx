@@ -4,7 +4,7 @@ export default function Footer () {
         <footer className="footer">
         <div className="container footer__container">
           <div className="footer__item footer__item_logo">
-            <a href="index.html" className="logo footer__logo"
+            <a href="/" className="logo footer__logo"
               ><img
                 src="/images/logo.svg"
                 alt="ElectroPuzzle"
