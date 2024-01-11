@@ -80,6 +80,7 @@ export default function BasketPage() {
     );
 
     setBasket(tempBasket);
+    console.log("yataa", totalPrice);
   }
 
   async function calculateTotalPrice(
@@ -119,6 +120,7 @@ export default function BasketPage() {
 
   useEffect(() => {
     getShippingOptions();
+    console.log(basket);
   }, [basket]);
 
   useEffect(() => {
