@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { addToBasket } from "@/vendor/basket/basket";
 import { setLazyProp } from "next/dist/server/api-utils";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function Page({ params }: { params: any }) {
   const [orderQuantity, setOrderQuantity] = useState(1);
@@ -258,7 +259,7 @@ export default function Page({ params }: { params: any }) {
               </h3>
 
               {/* videos */}
-              <section className="product-video">
+              <section className="product-video ">
                 <div
                   // onClick={() => openVideo('videos/video-one.mp4')}
                   className="product-video__item"
@@ -271,18 +272,50 @@ export default function Page({ params }: { params: any }) {
                       }
                     />
                   ) : (
-                    <>No videos found for this product</>
+                    <>Видео для этого продукта не найдено</>
                   )}
                 </div>
               </section>
 
-              <div id="video-modal" className="video-window-modal">
-                {/* <span () => lassName="close" onClick={closeVideo()">&times;</span} */}
-                <video id="modal-video" controls></video>
-              </div>
-
               <h3
                 className="product-content__title"
+                style={{ marginBottom: "15px" }}
+              >
+                Другие видео
+              </h3>
+
+              <div className="flex flex-row flex-wrap gap-10">
+              {mainProductData.youtube_links.data.map((video, index) => (
+               <div key={index} className="">
+                {/* Check if Embed Code is present */}
+                {video.attributes.embed_code ? (
+                  <div className="w-30 h-40" dangerouslySetInnerHTML={{ __html: video.attributes.embed_code }} />
+                  ) : (
+                    <>
+                    {/* Preview Image */}
+                    <Link href={video.attributes.link}>
+                      {video.attributes.preview_image.data.attributes.url && (
+                        <img
+                          className="w-30 h-96 rounded-lg inset-8 pointer-events-none"
+                          src={BACKEND_URI + video.attributes.preview_image.data.attributes.url}
+                          alt={video.attributes.preview_image.data.attributes.alternativeText}
+                        />
+                      )}
+                    </Link>
+                    {/* Link to YouTube */}
+                    <a href={video.attributes.link} className="mt-8" target="_blank" rel="noopener noreferrer">
+                      Watch on YouTube
+                    </a>
+                  </>
+                  )
+                }
+              </div>
+              ))}
+              </div>
+
+              <hr className="mt-20" />
+              <h3
+                className="product-content__title mt-10"
                 style={{ marginBottom: "30px" }}
               >
                 Управление
