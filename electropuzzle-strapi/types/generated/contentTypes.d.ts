@@ -1006,7 +1006,13 @@ export interface ApiPedalPedal extends Schema.CollectionType {
       'oneToMany',
       'api::category.category'
     >;
-    youtube_links: Attribute.JSON &
+    youtube_links: Attribute.Relation<
+      'api::pedal.pedal',
+      'oneToMany',
+      'api::youtube-link.youtube-link'
+    >;
+    avito_link: Attribute.String &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1115,6 +1121,38 @@ export interface ApiShippingCostShippingCost extends Schema.CollectionType {
   };
 }
 
+export interface ApiYoutubeLinkYoutubeLink extends Schema.CollectionType {
+  collectionName: 'youtube_links';
+  info: {
+    singularName: 'youtube-link';
+    pluralName: 'youtube-links';
+    displayName: 'Youtube Link';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    link: Attribute.String & Attribute.Required & Attribute.Unique;
+    embed_code: Attribute.String;
+    preview_image: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::youtube-link.youtube-link',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::youtube-link.youtube-link',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1139,6 +1177,7 @@ declare module '@strapi/types' {
       'api::pedal.pedal': ApiPedalPedal;
       'api::promo-code.promo-code': ApiPromoCodePromoCode;
       'api::shipping-cost.shipping-cost': ApiShippingCostShippingCost;
+      'api::youtube-link.youtube-link': ApiYoutubeLinkYoutubeLink;
     }
   }
 }
