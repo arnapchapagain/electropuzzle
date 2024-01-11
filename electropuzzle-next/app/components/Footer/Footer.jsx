@@ -32,25 +32,25 @@ export default function Footer () {
             <h2 className="footer__item-title">ПЕДАЛИ</h2>
             <ul className="footer__list footer__list_pedals">
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Дилеи</a>
+                <a href="/pedals" className="footer__list-link">Дилеи</a>
               </li>
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Бустеры</a>
+                <a href="/pedals" className="footer__list-link">Бустеры</a>
               </li>
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Овердрайвы</a>
+                <a href="/pedals" className="footer__list-link">Овердрайвы</a>
               </li>
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Дисторшены</a>
+                <a href="/pedals" className="footer__list-link">Дисторшены</a>
               </li>
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Модуляция</a>
+                <a href="/pedals" className="footer__list-link">Модуляция</a>
               </li>
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Фузы</a>
+                <a href="/pedals" className="footer__list-link">Фузы</a>
               </li>
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Компрессоры</a>
+                <a href="/pedals" className="footer__list-link">Компрессоры</a>
               </li>
             </ul>
           </div>
@@ -58,16 +58,13 @@ export default function Footer () {
             <h2 className="footer__item-title">СТРАНИЦЫ</h2>
             <ul className="footer__list footer__list_pages">
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Главная</a>
+                <a href="/" className="footer__list-link">Главная</a>
               </li>
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Педали</a>
+                <a href="/pedals" className="footer__list-link">Педали</a>
               </li>
               <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Контакты</a>
-              </li>
-              <li className="footer__list-item">
-                <a href="#" className="footer__list-link">Новости</a>
+                <a href="/contacts" className="footer__list-link">Контакты</a>
               </li>
             </ul>
           </div>
