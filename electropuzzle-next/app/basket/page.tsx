@@ -51,7 +51,7 @@ export default function BasketPage() {
             (priceBeforeDiscount * discountPercentage) / 100;
 
           setTotalPrice((prev) => {
-            return (prev += product.total);
+            return (prev = product.total);
           });
           return toast.success('Promocode applied successfully', {
             position: "top-right",

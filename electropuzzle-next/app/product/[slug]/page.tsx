@@ -289,7 +289,7 @@ export default function Page({ params }: { params: any }) {
                <div key={index} className="">
                 {/* Check if Embed Code is present */}
                 {video.attributes.embed_code ? (
-                  <div className="w-30 h-40" dangerouslySetInnerHTML={{ __html: video.attributes.embed_code }} />
+                  <div dangerouslySetInnerHTML={{ __html: video.attributes.embed_code }} />
                   ) : (
                     <>
                     {/* Preview Image */}
