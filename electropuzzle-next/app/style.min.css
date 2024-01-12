@@ -1137,7 +1137,7 @@ input:focus {
 }
 .main-basket {
   background-color: #f9f8f8;
-  padding: 117px 0 72px 0;
+  padding: 120px 50px;
   font-family: "Rubik", sans-serif;
 }
 .basket-content {
@@ -2456,10 +2456,11 @@ video {
     display: block !important;
   }
   .main-product {
-    padding: 117px 15px 45px 15px;
+    padding: 117px 150px;
   }
   .main-basket {
-    padding: 117px 15px 72px 15px;
+    padding: 117px 150px;
+
   }
   .product-video__item {
     width: 281px;
