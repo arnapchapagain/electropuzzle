@@ -56,7 +56,7 @@ export default function Home() {
               <h2 className="projects__title">НОВЫЕ ПРОЕКТЫ.</h2>
             </div>
             <div className="projects__content">
-              <a href="#" className="projects__item-link">
+              <a href="/pedals" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
@@ -69,7 +69,7 @@ export default function Home() {
                 </div>
               </a>
 
-              <a href="#" className="projects__item-link">
+              <a href="/pedals" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
@@ -82,7 +82,7 @@ export default function Home() {
                 </div>
               </a>
 
-              <a href="#" className="projects__item-link">
+              <a href="/pedals" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
@@ -95,7 +95,7 @@ export default function Home() {
                 </div>
               </a>
 
-              <a href="/error" className="projects__item-link">
+              <a href="/pedals" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
@@ -328,26 +328,6 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="photo">
-            <div
-              style={{
-                background:
-                  "url('/images/main-photo.webp') no-repeat; background-size: 100%",
-                width: "100vw",
-                height: "35rem",
-              }}
-              className="photo__block photo__block_desk"
-            ></div>
-            <div
-              style={{
-                background:
-                  "url('/images/main-photo-mobile.webp') no-repeat; display: none;background-size: 100%",
-                width: "100vw",
-                height: "35rem",
-              }}
-              className="photo__block photo__block_mob"
-            ></div>
-          </section>
         </main>
 
         <footer className="footer">

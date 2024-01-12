@@ -348,7 +348,7 @@ export default function Page({ params }: { params: any }) {
             </div>
 
             <div className="projects__content">
-              <a href="#" className="projects__item-link">
+              <a href="/pedals" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
@@ -361,7 +361,7 @@ export default function Page({ params }: { params: any }) {
                 </div>
               </a>
 
-              <a href="#" className="projects__item-link">
+              <a href="/pedals" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
@@ -374,7 +374,7 @@ export default function Page({ params }: { params: any }) {
                 </div>
               </a>
 
-              <a href="#" className="projects__item-link">
+              <a href="/pedals" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
@@ -387,7 +387,7 @@ export default function Page({ params }: { params: any }) {
                 </div>
               </a>
 
-              <a href="/404" className="projects__item-link">
+              <a href="/pedals" className="projects__item-link">
                 <div className="projects__item">
                   <figure>
                     <img
