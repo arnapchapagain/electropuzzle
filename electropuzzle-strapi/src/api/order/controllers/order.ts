@@ -20,12 +20,13 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async create(ctx: Context) {
       await this.validateQuery(ctx);
-      const validationResult = validateRequestBody(ctx);
-      if (validationResult.error) return ctx.badRequest(validationResult.error);
-      const body: ICreateOrder = validationResult.value;
+      // const validationResult = validateRequestBody(ctx);
+      // if (validationResult.error) return ctx.badRequest(validationResult.error);
+      // const body: ICreateOrder = validationResult.value;
+      const body = ctx.request.body as ICreateOrder;
       body.promo_codes = body.promo_codes.filter((code) => code !== "");
 
-      const basket = await getBasket(body.basket_id);
+      const basket = await getBasket(body.basket);
       if (!basket) return ctx.badRequest("Basket not found");
       if (basket.pedals.length === 0) return ctx.badRequest("Basket is empty");
 
@@ -56,7 +57,7 @@ export default factories.createCoreController(
 );
 
 const createOrderInterface = Joi.object({
-  basket_id: Joi.number().required(),
+  basket: Joi.number().required(),
   full_name: Joi.string().required(),
   phone: Joi.string().required(),
   email: Joi.string().email().required(),
@@ -73,7 +74,7 @@ const createOrderInterface = Joi.object({
 });
 
 interface ICreateOrder {
-  basket_id: number;
+  basket: number;
   full_name: string;
   phone: string;
   email: string;
@@ -146,8 +147,8 @@ async function calculatePedalPrice(pedal: any, promoCodes: string[]) {
 }
 
 async function createOrderEntry(orderData: ICreateOrder) {
-  const entry = await strapi.entityService.create("api::order.order", {
-    data: { ...orderData },
+  const entry = await strapi.db.query("api::order.order").create({
+    data: { ...orderData }
   });
   return entry.id;
 }
