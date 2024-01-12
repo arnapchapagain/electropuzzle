@@ -1,7 +1,6 @@
 "use client";
 
 import Video from "next-video";
-import myVideo from "../../../videos/video-one.mp4";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
@@ -12,6 +11,8 @@ import Carousel from "reactjs-nextjs-carousel";
 import { useEffect, useState } from "react";
 import { addToBasket } from "@/vendor/basket/basket";
 import Link from "next/link";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 
 export default function Page({ params }: { params: any }) {
   const [orderQuantity, setOrderQuantity] = useState(1);
@@ -201,8 +202,8 @@ export default function Page({ params }: { params: any }) {
                     </a>
                     <button
                       className="product-item__btn-basket"
-                      onClick={() => {
-                        addToBasket({
+                      onClick={async () => {
+                        await addToBasket({
                           productSlug: `${params.slug}`,
                           quantity: orderQuantity,
                         });
@@ -404,6 +405,18 @@ export default function Page({ params }: { params: any }) {
 
         <Footer />
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
     </>
   );
 }

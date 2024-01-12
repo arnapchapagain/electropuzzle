@@ -1,70 +1,12 @@
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 import Navbar from "./components/Navbar/Navbar"
 
 export default function Home() {
   return (
     <>
       <Navbar />
-
-      <nav id="burger-menu" className="burger-nav">
-        <div className="burger-nav__block">
-          <a tabIndex={-1} href="/" className="logo burger-nav__logo">
-            <img
-              src="/images/logo-black.svg"
-              alt="ElectroPuzzle"
-              className="logo__img burger-nav__logo-img"
-            />
-          </a>
-          <button
-            tabIndex={-1}
-            id="burger-close"
-            className="burger-nav__closes"
-          >
-            <img
-              src="/images/cancel.svg"
-              alt=""
-              className="burger-nav__closes-icon"
-            />
-          </button>
-          <ul className="burger-nav__list">
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="/"
-                className="burger-nav__item-link"
-              >
-                Главная
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="/pedals"
-                className="burger-nav__item-link"
-              >
-                Педали
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="/contacts"
-                className="burger-nav__item-link"
-              >
-                Контакты
-              </a>
-            </li>
-            <li className="burger-nav__item">
-              <a
-                tabIndex={-1}
-                href="/basket"
-                className="burger-nav__item-link"
-              >
-                Корзина
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
 
       <section className="hero">
         <div className="swiper hero__swiper">
@@ -235,7 +177,7 @@ export default function Home() {
                         className="offers__extra-img"
                       />
                     </div>
-                    <a href="#" className="offers__extra-btn">
+                    <a href="/pedals" className="offers__extra-btn">
                       ПОДРОБНЕЕ
                     </a>
                   </div>
@@ -555,6 +497,8 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+      
     </>
   );
 }

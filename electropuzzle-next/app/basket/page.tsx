@@ -8,9 +8,10 @@ import { getProductBySlug } from "../api/pedals/getPedalBySlug";
 import { validatePromoCode } from "../api/pedals/checkPromoCode";
 import Footer from "../components/Footer/Footer";
 import { shippingCosts } from "../api/shippingCost/getShippingCost";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BACKEND_URI from "../data";
+import { createOrder } from "../api/order/checkout";
 
 export default function BasketPage() {
   const [basket, setBasket] = useState<any>(getBasket());
@@ -36,6 +37,55 @@ export default function BasketPage() {
     }));
 
     console.log(formData)
+  };
+
+  const handleCreateOrder = async (e:any) => {
+    e.preventDefault();
+
+    if (
+      !formData.address_street ||
+      !formData.email ||
+      !formData.full_name ||
+      !formData.phone
+    ) {
+      return toast.error('All the fields are required.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+      }
+
+    const resOrder = await createOrder(formData, promoCode);
+    const confirmation_url = resOrder?.data?.attributes?.payment_info?.confirmation?.confirmation_url;
+
+    if (!resOrder || !resOrder.data || !confirmation_url) return toast.error('Something went wrong.', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    })
+
+    window.location.href = confirmation_url;
+    return toast.success('Payment transaction initiated successfully.', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    })
+    
   };
 
   async function iterateBasket(e: any) {
@@ -430,6 +480,7 @@ export default function BasketPage() {
                 </div>
 
                 <button
+                  onClick={handleCreateOrder}
                   id="showPopup"
                   className="btn-green basket-pay__btn-pay"
                   type="submit"
@@ -443,21 +494,6 @@ export default function BasketPage() {
 
         <Footer />
       </div>
-
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        />
-        {/* Same as */}
-      <ToastContainer />
     </>
   );
 }
