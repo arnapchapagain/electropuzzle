@@ -56,9 +56,20 @@ export default function BasketPage() {
         progress: undefined,
         theme: "light",
       })
-      }
+    }
 
-    const resOrder = await createOrder(formData, promoCode);
+    if (!shipCosts) return toast.error('Please select Shipping Address', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    })
+
+    const resOrder = await createOrder(formData, promoCode, shipCosts);
     const confirmation_url = resOrder?.data?.attributes?.payment_info?.confirmation?.confirmation_url;
 
     if (!resOrder || !resOrder.data || !confirmation_url) return toast.error('Something went wrong.', {

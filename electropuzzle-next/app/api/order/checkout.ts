@@ -1,7 +1,7 @@
 import BACKEND_URI from "../../data";
 import Cookies from "js-cookie";
 
-export async function createOrder(formData: any, promoCode: string) {
+export async function createOrder(formData: any, promoCode: string, shipCosts: number) {
     const url = `${BACKEND_URI}/api/orders`;
 
     const existingBasketID = Cookies.get("BasketID");
@@ -19,6 +19,7 @@ export async function createOrder(formData: any, promoCode: string) {
             body: JSON.stringify({
                 ...formData, 
                 "basket_id": parseInt(existingBasketID),
+                "shipping_cost": shipCosts,
                 "status": "initiated",
                 "promo_codes": [promoCode]
             })
