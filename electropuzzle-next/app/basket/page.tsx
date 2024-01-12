@@ -35,8 +35,6 @@ export default function BasketPage() {
       ...prevData,
       [name]: value,
     }));
-
-    console.log(formData)
   };
 
   const handleCreateOrder = async (e:any) => {
@@ -448,7 +446,7 @@ export default function BasketPage() {
                     </div> */}
                   </fieldset>
                 </form>
-                <div>
+                <div className="basket-pay__form-title">
                   {basket.map(
                     (
                       product: {
@@ -470,8 +468,7 @@ export default function BasketPage() {
                     <p className="basket-pay__text">Shipping Cost</p>
                     <p className="basket-pay__price">{shipCosts} ₽</p>
                   </div>
-                  <hr />
-                  <div className="basket-pay__info">
+                  <div className="basket-pay__info ">
                     <p className="basket-pay__text">Final Amount</p>
                     <p className="basket-pay__price">
                       {totalPrice + shipCosts} ₽
