@@ -1,7 +1,7 @@
 import BACKEND_URI from "../../data";
 
-export async function createNewsletter() {
-    const url = `${BACKEND_URI}/api/baskets`;
+export async function createNewsletter(email: string) {
+    const url = `${BACKEND_URI}/api/newsletter-emails`;
     
     const headers = {
         'Accept': 'application/json',
@@ -12,7 +12,11 @@ export async function createNewsletter() {
         const response = await fetch(url, {
             method: 'POST',
             headers: headers,
-            body: JSON.stringify({})
+            body: JSON.stringify({
+                data: {
+                    email: email
+                }
+            })
         })
 
         if (!response.ok) {
@@ -20,7 +24,7 @@ export async function createNewsletter() {
         }
 
         const data = await response.json();
-        return;
+        return data;
 
     } catch (error) {
         console.log(error);

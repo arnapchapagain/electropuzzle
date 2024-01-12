@@ -45,7 +45,7 @@ export async function createBasket() {
 
     const data = await response.json();
     Cookies.set("BasketID", JSON.stringify(data.data.id));
-    return;
+    return data;
 
   } catch (error) {
     console.log(error);
