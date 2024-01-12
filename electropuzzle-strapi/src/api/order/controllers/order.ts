@@ -23,6 +23,7 @@ export default factories.createCoreController(
       const validationResult = validateRequestBody(ctx);
       if (validationResult.error) return ctx.badRequest(validationResult.error);
       const body: ICreateOrder = validationResult.value;
+      body.promo_codes = body.promo_codes.filter((code) => code !== "");
 
       const basket = await getBasket(body.basket_id);
       if (!basket) return ctx.badRequest("Basket not found");
@@ -60,6 +61,7 @@ const createOrderInterface = Joi.object({
   phone: Joi.string().required(),
   email: Joi.string().email().required(),
   address_street: Joi.string().required(),
+  shipping_cost: Joi.number().required(),
   status: Joi.string().required(),
   address_apartment: Joi.string(),
   address_index: Joi.string(),
@@ -67,7 +69,7 @@ const createOrderInterface = Joi.object({
   address_entrance: Joi.string(),
   comments: Joi.string(),
   payment_id: Joi.string(),
-  promo_codes: Joi.array().items(Joi.string()),
+  promo_codes: Joi.array().items(Joi.string().allow("")),
 });
 
 interface ICreateOrder {
@@ -76,6 +78,7 @@ interface ICreateOrder {
   phone: string;
   email: string;
   address_street: string;
+  shipping_cost: number
   status: string;
   address_apartment?: string;
   address_index?: string;
@@ -121,6 +124,7 @@ async function fetchPedalInfo(pedalId: number) {
 // Calculates the price of a pedal after applying applicable promo codes
 function calculateDiscountedPrice(pedalInfo: any, promoCodes: string[]) {
   let price = pedalInfo.price;
+  if (!pedalInfo)
   pedalInfo.promo_codes.forEach((applicablePromoCode) => {
     if (promoCodes.includes(applicablePromoCode.code)) {
       let discountAmount = pedalInfo.price * (applicablePromoCode.discount_percentage / 100);
@@ -135,9 +139,10 @@ function calculateDiscountedPrice(pedalInfo: any, promoCodes: string[]) {
 
 // Determines the final price of a pedal, considering whether promo codes are applied or not
 async function calculatePedalPrice(pedal: any, promoCodes: string[]) {
-  return promoCodes.length > 0
-    ? calculateDiscountedPrice(pedal, promoCodes)
-    : pedal.price;
+  if (promoCodes && promoCodes.length > 0)  
+    return calculateDiscountedPrice(pedal, promoCodes);
+  else 
+    return pedal.price;
 }
 
 async function createOrderEntry(orderData: ICreateOrder) {
@@ -163,6 +168,7 @@ async function createPaymentPayload(
     }
     let pedalPrice = await calculatePedalPrice(pedalInfo, order.promo_codes);
     totalCost += pedalPrice;
+    totalCost += order.shipping_cost;
     items.push({
       description: `Order of ${pedalInfo.name} by ${order.full_name}`,
       quantity: 1,
