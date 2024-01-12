@@ -2327,7 +2327,7 @@ video {
     width: 100%;
     margin-bottom: 20px;
   }
-}
+
 @media screen and (max-width: 768px) {
   .offers__grid-block {
     display: none !important;

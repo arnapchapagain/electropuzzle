@@ -1501,7 +1501,7 @@ label {
 }
 .main-product {
   background-color: #f9f8f8;
-  padding: 117px 0 45px 0;
+  padding: 117px 45px ;
   font-family: "Rubik", sans-serif;
   color: #505050;
   font-size: 20px;
@@ -2456,7 +2456,7 @@ video {
     display: block !important;
   }
   .main-product {
-    padding: 117px 150px;
+    padding: 0px !important;
   }
   .main-basket {
     padding: 117px 150px;

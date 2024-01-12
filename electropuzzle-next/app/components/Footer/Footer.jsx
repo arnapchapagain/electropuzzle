@@ -1,3 +1,5 @@
+'use client'
+
 import { createNewsletter } from "@/app/api/newsletter/createNewsletter";
 import { useState } from "react"
 import { toast } from 'react-toastify';
