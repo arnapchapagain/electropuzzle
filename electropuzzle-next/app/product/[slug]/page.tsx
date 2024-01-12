@@ -195,6 +195,8 @@ export default function Page({ params }: { params: any }) {
                   <div className="product-item__btn-block">
                     <a
                       href={mainProductData.avito_link}
+                      target="_blank" 
+                      rel="noopener noreferrer"
                       style={{color: "white !important"}}
                       className="w-50 py-6 me-6 rounded-full px-12 mb-4 bg-green-900 text-white"
                     >
