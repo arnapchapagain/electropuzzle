@@ -139,9 +139,9 @@ function calculateDiscountedPrice(pedalInfo: any, promoCodes: string[]) {
 
 // Determines the final price of a pedal, considering whether promo codes are applied or not
 async function calculatePedalPrice(pedal: any, promoCodes: string[]) {
-  if (promoCodes && promoCodes.length > 0)  
+  if (promoCodes && promoCodes.length > 0)
     return calculateDiscountedPrice(pedal, promoCodes);
-  else 
+  else
     return pedal.price;
 }
 
@@ -191,7 +191,7 @@ async function createPaymentPayload(
       type: "redirect",
       return_url:
         process.env.CHECKOUT_SUCCESS_URL ||
-        "http://localhost:1337/orders/success",
+        "http://localhost:1337/success",
     },
     receipt: {
       customer: {
