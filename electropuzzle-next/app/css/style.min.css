@@ -2363,7 +2363,8 @@ video {
     padding-left: 25px;
   }
   .projects__content {
-    display: none;
+    display: flex;
+    flex-wrap: wrap !important;
   }
   .projects__swiper {
     display: block;

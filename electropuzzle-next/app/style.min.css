@@ -451,6 +451,7 @@ input:focus {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  flex-wrap: wrap !important;
 }
 .projects__item-link {
   width: 100%;
@@ -2367,9 +2368,7 @@ video {
   .projects__head {
     padding-left: 25px;
   }
-  .projects__content {
-    display: none;
-  }
+
   .projects__swiper {
     display: block;
   }
